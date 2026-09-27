@@ -1,0 +1,231 @@
+---
+// src/pages/index.astro
+import '../styles/global.css';
+---
+
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Muhammad Raihanul Karim | Portfolio</title>
+  <!-- Google Font: Lato -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,400&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Lato', sans-serif; }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-900 antialiased selection:bg-blue-600 selection:text-white">
+
+  <!-- Sticky Top Navigation -->
+  <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200">
+    <div class="max-w-4xl mx-auto px-5 h-16 flex items-center justify-between">
+      <a href="#" class="font-extrabold text-base tracking-tight text-slate-900">RAIHANUL KARIM</a>
+      <nav class="flex items-center gap-5 text-sm font-semibold text-slate-600">
+        <a href="#experience" class="hover:text-blue-600 transition">Experience</a>
+        <a href="#leadership" class="hover:text-blue-600 transition">Leadership</a>
+        <a href="#education" class="hover:text-blue-600 transition">Education</a>
+        <a href="#skills" class="hover:text-blue-600 transition">Skills</a>
+        <a href="mailto:raihanulkarim02@gmail.com" class="bg-slate-900 text-white text-xs px-3.5 py-2 rounded-lg hover:bg-blue-600 transition">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section with Background Photo Support -->
+  <section 
+    class="relative bg-slate-900 text-white py-24 px-5 bg-cover bg-center"
+    style="background-image: linear-gradient(180deg, rgba(15, 23, 42, 0.75) 0%, rgba(15, 23, 42, 0.95) 100%), url('/images/hero-bg.png');"
+  >
+    <div class="max-w-4xl mx-auto">
+      <div class="inline-flex items-center gap-2 bg-white/10 border border-white/20 px-3.5 py-1 rounded-full text-xs font-semibold text-blue-300 mb-6 backdrop-blur-sm">
+        <span class="w-2 h-2 rounded-full bg-blue-400 animate-pulse"></span>
+        Materials Science Undergrad · Project Lead · Explorer
+      </div>
+      <h1 class="text-3xl sm:text-5xl font-black tracking-tight leading-tight mb-4">
+        Muhammad Raihanul Karim
+      </h1>
+      <p class="text-base sm:text-lg text-slate-300 max-w-2xl leading-relaxed mb-8">
+        Final-year Materials and Metallurgical Engineering undergrad at CUET[cite: 1]. Balancing technical engineering discipline with large-scale summit execution, multi-stakeholder management, and outdoor exploration[cite: 1].
+      </p>
+      <div class="flex flex-wrap gap-3">
+        <a href="#experience" class="bg-blue-600 hover:bg-blue-500 text-white text-sm font-bold px-5 py-2.5 rounded-lg transition shadow-sm">Explore Experience &darr;</a>
+        <a href="#leadership" class="bg-white/10 hover:bg-white/20 text-white border border-white/20 text-sm font-bold px-5 py-2.5 rounded-lg transition backdrop-blur-sm">Leadership & Summits</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content Container -->
+  <main class="max-w-4xl mx-auto px-5 py-16 space-y-16">
+
+    <!-- 1. Professional and Industrial -->
+    <section id="experience">
+      <h2 class="text-xl font-black text-slate-900 mb-6">Professional and Industrial</h2>
+
+      <div class="bg-white border border-slate-200 rounded-xl p-6 shadow-sm">
+        <!-- Logo and details locked horizontally on mobile and desktop -->
+        <div class="flex items-start gap-4">
+          <img 
+            src="/images/green-lead.png" 
+            alt="Green Lead" 
+            class="w-11 h-11 rounded-lg object-cover bg-slate-900 flex-shrink-0 border border-slate-200"
+            onerror="this.src='https://ui-avatars.com/api/?name=GL&background=0b132b&color=10b981&bold=true'"
+          />
+          <div class="flex-1 min-w-0">
+            <div class="flex flex-wrap justify-between items-baseline gap-1">
+              <h3 class="font-bold text-base text-slate-900">Green Lead</h3>
+              <span class="text-xs font-semibold text-slate-500">Aug 2024 – Present[cite: 1]</span>
+            </div>
+
+            <!-- Role 1: Project Assistant -->
+            <div class="mt-4 border-l-2 border-blue-600 pl-3.5 space-y-1">
+              <h4 class="font-bold text-sm text-slate-800">Project Assistant</h4>
+              <p class="text-xs font-semibold text-blue-600">Mar 2025 – Present · Full-time[cite: 1]</p>
+              <ul class="text-xs sm:text-sm text-slate-600 space-y-1.5 list-disc ml-4 pt-1 leading-relaxed">
+                <li>Spearheaded planning, coordination, and execution of multiple projects, ensuring on-time delivery[cite: 1].</li>
+                <li>Organized 3+ national summits, training programs, and forums collaborating with government and NGO stakeholders[cite: 1].</li>
+                <li>Contributed operational support to "Re-energize Bangladesh," the nation's first national renewable energy information center[cite: 1].</li>
+                <li>Collaborated with cross-functional teams to maintain workflow alignment and partner communication[cite: 1].</li>
+              </ul>
+            </div>
+
+            <!-- Role 2: Project Intern -->
+            <div class="mt-4 border-l-2 border-slate-200 pl-3.5 space-y-1">
+              <h4 class="font-bold text-sm text-slate-800">Project Intern</h4>
+              <p class="text-xs text-slate-500">Aug 2024 – Mar 2025 · 8 mos[cite: 1]</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. Leadership & Extracurricular Activities -->
+    <section id="leadership">
+      <h2 class="text-xl font-black text-slate-900 mb-6">Leadership & Extracurricular Activities</h2>
+      <div class="space-y-4">
+        
+        <!-- Hult Prize -->
+        <div class="bg-white border border-slate-200 rounded-xl p-5 shadow-sm flex items-start gap-4">
+          <img src="/images/hult-prize.png" alt="HULT Prize" class="w-10 h-10 rounded-lg flex-shrink-0 border border-slate-200" onerror="this.src='https://ui-avatars.com/api/?name=HP&background=e11d48&color=ffffff&bold=true'" />
+          <div class="flex-1 min-w-0">
+            <div class="flex flex-wrap justify-between items-baseline gap-1">
+              <h3 class="font-bold text-sm sm:text-base text-slate-900">Campus Director · HULT PRIZE at CUET</h3>
+              <span class="text-xs text-blue-600 font-semibold">Sep 2025 – Mar 2026[cite: 1]</span>
+            </div>
+            <ul class="text-xs sm:text-sm text-slate-600 space-y-1 list-disc ml-4 mt-2 leading-relaxed">
+              <li>Led 50+ core team members and managed 100+ competing enterprise teams involving 300+ participants[cite: 1].</li>
+              <li>Collaborated with global Hult Prize teams and industry leaders for judging and sponsorships[cite: 1].</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- TEDx CUET -->
+        <div class="bg-white border border-slate-200 rounded-xl p-5 shadow-sm flex items-start gap-4">
+          <img src="/images/tedx.png" alt="TEDx CUET" class="w-10 h-10 rounded-lg flex-shrink-0 border border-slate-200" onerror="this.src='https://ui-avatars.com/api/?name=TX&background=dc2626&color=ffffff&bold=true'" />
+          <div class="flex-1 min-w-0">
+            <div class="flex flex-wrap justify-between items-baseline gap-1">
+              <h3 class="font-bold text-sm sm:text-base text-slate-900">Team Lead · TEDx CUET</h3>
+              <span class="text-xs text-blue-600 font-semibold">Mar 2025 – Jun 2025[cite: 1]</span>
+            </div>
+            <ul class="text-xs sm:text-sm text-slate-600 space-y-1 list-disc ml-4 mt-2 leading-relaxed">
+              <li>Coordinated cross-functional teams for event logistics, speaker care, and stage management[cite: 1].</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- CUET Integration Bee -->
+        <div class="bg-white border border-slate-200 rounded-xl p-5 shadow-sm flex items-start gap-4">
+          <img src="/images/integration-bee.png" alt="Integration Bee" class="w-10 h-10 rounded-lg flex-shrink-0 border border-slate-200" onerror="this.src='https://ui-avatars.com/api/?name=IB&background=4f46e5&color=ffffff&bold=true'" />
+          <div class="flex-1 min-w-0">
+            <div class="flex flex-wrap justify-between items-baseline gap-1">
+              <h3 class="font-bold text-sm sm:text-base text-slate-900">Senior Executive · CUET Integration Bee</h3>
+              <span class="text-xs text-blue-600 font-semibold">Feb 2025 – Jan 2026[cite: 1]</span>
+            </div>
+            <ul class="text-xs sm:text-sm text-slate-600 space-y-1 list-disc ml-4 mt-2 leading-relaxed">
+              <li>Organized live problem-solving rounds and hosted the grand final for Bangladesh's first Integration Bee[cite: 1].</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 3. Education -->
+    <section id="education">
+      <h2 class="text-xl font-black text-slate-900 mb-6">Education</h2>
+      <div class="bg-white border border-slate-200 rounded-xl p-6 shadow-sm space-y-6">
+        
+        <div class="border-l-2 border-blue-600 pl-4">
+          <div class="flex flex-wrap justify-between items-baseline gap-1">
+            <h3 class="font-bold text-sm sm:text-base text-slate-900">B.Sc. in Materials and Metallurgical Engineering</h3>
+            <span class="text-xs font-semibold text-blue-600 bg-blue-50 px-2.5 py-0.5 rounded-full">2022 – Present[cite: 1]</span>
+          </div>
+          <p class="text-xs sm:text-sm text-slate-600 mt-1">Chittagong University of Engineering and Technology (CUET)[cite: 1]</p>
+          <span class="inline-block text-xs font-bold text-teal-800 bg-teal-50 border border-teal-200 px-2 py-0.5 rounded mt-2">Expected Graduation: 2027[cite: 1]</span>
+        </div>
+
+        <div class="border-l-2 border-slate-200 pl-4">
+          <div class="flex flex-wrap justify-between items-baseline gap-1">
+            <h3 class="font-bold text-sm sm:text-base text-slate-900">Higher Secondary Certificate (HSC)</h3>
+            <span class="text-xs font-semibold text-slate-500">2019 – 2021[cite: 1]</span>
+          </div>
+          <p class="text-xs sm:text-sm text-slate-600 mt-1">Chittagong College[cite: 1]</p>
+          <span class="inline-block text-xs font-bold text-teal-800 bg-teal-50 border border-teal-200 px-2 py-0.5 rounded mt-2">GPA: 5.00[cite: 1]</span>
+        </div>
+
+        <div class="border-l-2 border-slate-200 pl-4">
+          <div class="flex flex-wrap justify-between items-baseline gap-1">
+            <h3 class="font-bold text-sm sm:text-base text-slate-900">Secondary School Certificate (SSC)</h3>
+            <span class="text-xs font-semibold text-slate-500">2014 – 2019[cite: 1]</span>
+          </div>
+          <p class="text-xs sm:text-sm text-slate-600 mt-1">Nasirabad Govt. High School[cite: 1]</p>
+          <span class="inline-block text-xs font-bold text-teal-800 bg-teal-50 border border-teal-200 px-2 py-0.5 rounded mt-2">GPA: 5.00[cite: 1]</span>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 4. Skills -->
+    <section id="skills">
+      <h2 class="text-xl font-black text-slate-900 mb-6">Skills & Toolkit</h2>
+      <div class="space-y-4">
+        
+        <div class="bg-white border border-slate-200 rounded-xl p-5 shadow-sm">
+          <h3 class="text-xs font-extrabold uppercase tracking-wider text-amber-800 mb-3">Technical & Core Engineering</h3>
+          <div class="flex flex-wrap gap-2">
+            {['Metallography', 'Metallurgical Analysis', 'Microstructure Interpretation', 'Failure Analysis & Material Testing', 'Data Analysis', 'Heat Treatment Process'].map(skill => (
+              <span class="bg-slate-100 hover:bg-slate-900 hover:text-white transition-colors border border-slate-200 text-slate-700 text-xs font-medium px-3 py-1.5 rounded-md cursor-default">{skill}</span>
+            ))}
+          </div>
+        </div>
+
+        <div class="bg-white border border-slate-200 rounded-xl p-5 shadow-sm">
+          <h3 class="text-xs font-extrabold uppercase tracking-wider text-amber-800 mb-3">Software & Analytical Tools</h3>
+          <div class="flex flex-wrap gap-2">
+            {['MATLAB', 'VESTA', 'ImageJ', 'Microsoft Office Suite', 'Adobe Illustrator', 'Adobe Photoshop'].map(skill => (
+              <span class="bg-slate-100 hover:bg-slate-900 hover:text-white transition-colors border border-slate-200 text-slate-700 text-xs font-medium px-3 py-1.5 rounded-md cursor-default">{skill}</span>
+            ))}
+          </div>
+        </div>
+
+        <div class="bg-white border border-slate-200 rounded-xl p-5 shadow-sm">
+          <h3 class="text-xs font-extrabold uppercase tracking-wider text-amber-800 mb-3">Professional & Leadership</h3>
+          <div class="flex flex-wrap gap-2">
+            {['Project Planning & Coordination', 'Event Management & Execution', 'Leadership & Team Management', 'Strategic Planning & Negotiation', 'Communication & Public Speaking', 'Debate and MUN'].map(skill => (
+              <span class="bg-slate-100 hover:bg-slate-900 hover:text-white transition-colors border border-slate-200 text-slate-700 text-xs font-medium px-3 py-1.5 rounded-md cursor-default">{skill}</span>
+            ))}
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="border-t border-slate-200 py-8 bg-white text-center text-xs text-slate-500">
+    <p>© 2026 Muhammad Raihanul Karim · Built with Astro & Tailwind CSS</p>
+  </footer>
+
+</body>
+</html>
