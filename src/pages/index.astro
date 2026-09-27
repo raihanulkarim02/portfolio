@@ -1,6 +1,11 @@
 ---
 // src/pages/index.astro
 import '../styles/global.css';
+
+// Fetch all markdown posts to display recent articles on the homepage
+const posts = Object.values(import.meta.glob('../content/blog/*.md', { eager: true }));
+posts.sort((a: any, b: any) => new Date(b.frontmatter.pubDate).getTime() - new Date(a.frontmatter.pubDate).getTime());
+const recentPosts = posts.slice(0, 2);
 ---
 
 <!DOCTYPE html>
@@ -15,44 +20,83 @@ import '../styles/global.css';
   <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,400&display=swap" rel="stylesheet">
   <style>
     body { font-family: 'Lato', sans-serif; }
+    .section-title { color: #d2691e; } /* Chocolate heading */
   </style>
 </head>
-<body class="bg-slate-50 text-slate-900 antialiased selection:bg-blue-600 selection:text-white">
+<body class="bg-slate-50 text-slate-900 antialiased selection:bg-amber-800 selection:text-white">
 
-  <!-- Sticky Top Navigation -->
-  <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200">
+  <!-- Dark Top Navigation with Mobile Hamburger Menu -->
+  <header class="sticky top-0 z-50 bg-neutral-950/95 backdrop-blur-md border-b border-neutral-800 text-white">
     <div class="max-w-4xl mx-auto px-5 h-16 flex items-center justify-between">
-      <a href="#" class="font-extrabold text-base tracking-tight text-slate-900">RAIHANUL KARIM</a>
-      <nav class="flex items-center gap-5 text-sm font-semibold text-slate-600">
-        <a href="#experience" class="hover:text-blue-600 transition">Experience</a>
-        <a href="#leadership" class="hover:text-blue-600 transition">Leadership</a>
-        <a href="#education" class="hover:text-blue-600 transition">Education</a>
-        <a href="#skills" class="hover:text-blue-600 transition">Skills</a>
-        <a href="mailto:raihanulkarim02@gmail.com" class="bg-slate-900 text-white text-xs px-3.5 py-2 rounded-lg hover:bg-blue-600 transition">Contact</a>
+      
+      <!-- Brand Logo -->
+      <a href="/" class="flex items-center">
+        <img 
+          src="/images/logo.png" 
+          alt="@raihan_26" 
+          class="h-7 sm:h-8 w-auto object-contain" 
+        />
+      </a>
+
+      <!-- Desktop Navigation Menu -->
+      <nav class="hidden md:flex items-center gap-6 text-sm font-semibold text-slate-300">
+        <a href="#experience" class="hover:text-amber-400 transition">Experience</a>
+        <a href="#leadership" class="hover:text-amber-400 transition">Leadership</a>
+        <a href="#education" class="hover:text-amber-400 transition">Education</a>
+        <a href="#skills" class="hover:text-amber-400 transition">Skills</a>
+        <a href="/blog" class="text-amber-400 font-bold hover:text-amber-300 transition">Blog</a>
+        <a href="mailto:raihanulkarim02@gmail.com" class="bg-amber-700 hover:bg-amber-600 text-white text-xs px-3.5 py-2 rounded-lg transition font-bold">Contact</a>
       </nav>
+
+      <!-- Mobile Hamburger Button (Three-Line Icon) -->
+      <button 
+        id="mobile-menu-btn" 
+        type="button" 
+        aria-label="Toggle Navigation Menu"
+        class="md:hidden p-2 text-slate-300 hover:text-white focus:outline-none"
+      >
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+
+    </div>
+
+    <!-- Mobile Dropdown Menu -->
+    <div id="mobile-menu" class="hidden md:hidden bg-neutral-900 border-b border-neutral-800 px-5 py-4 space-y-3">
+      <a href="#experience" class="block text-sm font-semibold text-slate-200 hover:text-amber-400 transition py-1">Experience</a>
+      <a href="#leadership" class="block text-sm font-semibold text-slate-200 hover:text-amber-400 transition py-1">Leadership</a>
+      <a href="#education" class="block text-sm font-semibold text-slate-200 hover:text-amber-400 transition py-1">Education</a>
+      <a href="#skills" class="block text-sm font-semibold text-slate-200 hover:text-amber-400 transition py-1">Skills</a>
+      <a href="/blog" class="block text-sm font-bold text-amber-400 hover:text-amber-300 transition py-1">Blog</a>
+      <a href="mailto:raihanulkarim02@gmail.com" class="inline-block mt-2 bg-amber-700 hover:bg-amber-600 text-white text-xs px-4 py-2 rounded-lg transition font-bold">Contact</a>
     </div>
   </header>
 
-  <!-- Hero Section with Background Photo Support -->
+  <!-- Hero Section (Clearer Image Overlay + Screen-Covering Bold Name) -->
   <section 
-    class="relative bg-slate-900 text-white py-24 px-5 bg-cover bg-center"
-    style="background-image: linear-gradient(180deg, rgba(15, 23, 42, 0.75) 0%, rgba(15, 23, 42, 0.95) 100%), url('/images/hero-bg.png');"
+    class="relative bg-slate-900 text-white py-24 sm:py-36 px-5 bg-cover bg-center"
+    style="background-image: linear-gradient(180deg, rgba(15, 23, 42, 0.40) 0%, rgba(15, 23, 42, 0.68) 100%), url('/images/hero-bg.jpg');"
   >
     <div class="max-w-4xl mx-auto">
-      <div class="inline-flex items-center gap-2 bg-white/10 border border-white/20 px-3.5 py-1 rounded-full text-xs font-semibold text-blue-300 mb-6 backdrop-blur-sm">
-        <span class="w-2 h-2 rounded-full bg-blue-400 animate-pulse"></span>
-        Materials Science Undergrad · Project Lead · Explorer
+      
+      <!-- Tag Above Name -->
+      <div class="inline-flex items-center gap-2 bg-black/40 border border-white/20 px-3.5 py-1.5 rounded-full text-xs font-semibold text-amber-300 mb-6 backdrop-blur-md">
+        <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
+        Materials Engineering Undergrad and Project Lead
       </div>
-      <h1 class="text-3xl sm:text-5xl font-black tracking-tight leading-tight mb-4">
-        Muhammad Raihanul Karim
+
+      <!-- Large Bold Name Display -->
+      <h1 class="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight leading-none mb-8 text-white drop-shadow-md">
+        Muhammad<br class="hidden sm:inline" /> Raihanul Karim
       </h1>
-      <p class="text-base sm:text-lg text-slate-300 max-w-2xl leading-relaxed mb-8">
-        Final-year Materials and Metallurgical Engineering undergrad at CUET[cite: 1]. Balancing technical engineering discipline with large-scale summit execution, multi-stakeholder management, and outdoor exploration[cite: 1].
-      </p>
+
+      <!-- Action Buttons -->
       <div class="flex flex-wrap gap-3">
-        <a href="#experience" class="bg-blue-600 hover:bg-blue-500 text-white text-sm font-bold px-5 py-2.5 rounded-lg transition shadow-sm">Explore Experience &darr;</a>
-        <a href="#leadership" class="bg-white/10 hover:bg-white/20 text-white border border-white/20 text-sm font-bold px-5 py-2.5 rounded-lg transition backdrop-blur-sm">Leadership & Summits</a>
+        <a href="#experience" class="bg-amber-700 hover:bg-amber-600 text-white text-sm font-bold px-5 py-2.5 rounded-lg transition shadow-md">Explore Experience &darr;</a>
+        <a href="/blog" class="bg-black/40 hover:bg-black/60 text-white border border-white/30 text-sm font-bold px-5 py-2.5 rounded-lg transition backdrop-blur-md">Read Blog Posts &rarr;</a>
       </div>
+
     </div>
   </section>
 
@@ -61,10 +105,9 @@ import '../styles/global.css';
 
     <!-- 1. Professional and Industrial -->
     <section id="experience">
-      <h2 class="text-xl font-black text-slate-900 mb-6">Professional and Industrial</h2>
+      <h2 class="text-xl font-black section-title mb-6">Professional and Industrial</h2>
 
       <div class="bg-white border border-slate-200 rounded-xl p-6 shadow-sm">
-        <!-- Logo and details locked horizontally on mobile and desktop -->
         <div class="flex items-start gap-4">
           <img 
             src="/images/green-lead.png" 
@@ -75,26 +118,36 @@ import '../styles/global.css';
           <div class="flex-1 min-w-0">
             <div class="flex flex-wrap justify-between items-baseline gap-1">
               <h3 class="font-bold text-base text-slate-900">Green Lead</h3>
-              <span class="text-xs font-semibold text-slate-500">Aug 2024 – Present[cite: 1]</span>
+              <span class="text-xs font-semibold text-slate-500">Aug 2024 – Present</span>
             </div>
 
-            <!-- Role 1: Project Assistant -->
-            <div class="mt-4 border-l-2 border-blue-600 pl-3.5 space-y-1">
-              <h4 class="font-bold text-sm text-slate-800">Project Assistant</h4>
-              <p class="text-xs font-semibold text-blue-600">Mar 2025 – Present · Full-time[cite: 1]</p>
+            <!-- Role Details with LinkedIn-Style Read More -->
+            <div class="mt-4 border-l-2 border-amber-700 pl-3.5 space-y-1">
+              <h4 class="font-bold text-sm text-slate-800">Project Assistant (Promoted from Project Intern)</h4>
+              <p class="text-xs font-semibold text-amber-700">Aug 2024 – Present</p>
+              
+              <!-- First 2 Visible Bullets -->
               <ul class="text-xs sm:text-sm text-slate-600 space-y-1.5 list-disc ml-4 pt-1 leading-relaxed">
-                <li>Spearheaded planning, coordination, and execution of multiple projects, ensuring on-time delivery[cite: 1].</li>
-                <li>Organized 3+ national summits, training programs, and forums collaborating with government and NGO stakeholders[cite: 1].</li>
-                <li>Contributed operational support to "Re-energize Bangladesh," the nation's first national renewable energy information center[cite: 1].</li>
-                <li>Collaborated with cross-functional teams to maintain workflow alignment and partner communication[cite: 1].</li>
+                <li>Spearheaded and supported planning, coordination, and execution of multiple projects, ensuring on-time delivery and quality outcomes across initiatives.</li>
+                <li>Organized and successfully executed 3+ national summits, training programs, and forums from scratch, collaborating with government and non-government stakeholders for end-to-end implementation.</li>
               </ul>
+
+              <!-- Collapsed Content Container -->
+              <div class="expandable-content hidden">
+                <ul class="text-xs sm:text-sm text-slate-600 space-y-1.5 list-disc ml-4 pt-1.5 leading-relaxed">
+                  <li>Led and managed 5+ online and offline workshops and courses, and initiated 3+ competitions and community engagement activities focused on renewable energy, health & safety, and sustainability.</li>
+                  <li>Contributed to Bangladesh's first One Stop Centre For National Renewable Energy Information, "Re-energize Bangladesh," supporting initiative development and operational coordination.</li>
+                  <li>Developed creative content and strategic communication approaches, improving organic reach and audience engagement across platforms.</li>
+                  <li>Collaborated with cross-functional teams and stakeholders, ensuring smooth workflow, alignment of objectives, and effective communication across projects.</li>
+                </ul>
+              </div>
+
+              <!-- Toggle Button -->
+              <button type="button" class="expand-btn text-xs font-bold text-amber-800 hover:text-amber-900 mt-2 inline-flex items-center gap-1 focus:outline-none">
+                …see more
+              </button>
             </div>
 
-            <!-- Role 2: Project Intern -->
-            <div class="mt-4 border-l-2 border-slate-200 pl-3.5 space-y-1">
-              <h4 class="font-bold text-sm text-slate-800">Project Intern</h4>
-              <p class="text-xs text-slate-500">Aug 2024 – Mar 2025 · 8 mos[cite: 1]</p>
-            </div>
           </div>
         </div>
       </div>
@@ -102,21 +155,67 @@ import '../styles/global.css';
 
     <!-- 2. Leadership & Extracurricular Activities -->
     <section id="leadership">
-      <h2 class="text-xl font-black text-slate-900 mb-6">Leadership & Extracurricular Activities</h2>
+      <h2 class="text-xl font-black section-title mb-6">Leadership & Extracurricular Activities</h2>
       <div class="space-y-4">
         
+        <!-- CUET Model United Nations Club -->
+        <div class="bg-white border border-slate-200 rounded-xl p-5 shadow-sm flex items-start gap-4">
+          <img src="/images/cuetmunc.png" alt="CUETMUNC" class="w-10 h-10 rounded-lg flex-shrink-0 border border-slate-200" onerror="this.src='https://ui-avatars.com/api/?name=MUN&background=0284c7&color=ffffff&bold=true'" />
+          <div class="flex-1 min-w-0">
+            <div class="flex flex-wrap justify-between items-baseline gap-1">
+              <h3 class="font-bold text-sm sm:text-base text-slate-900">Vice President (Delegate) · CUET Model United Nations Club</h3>
+              <span class="text-xs text-amber-800 font-semibold">Sep 2026 – Present</span>
+            </div>
+            <ul class="text-xs sm:text-sm text-slate-600 space-y-1 list-disc ml-4 mt-2 leading-relaxed">
+              <li>Lead and coordinate club initiatives, supporting strategic planning, member engagement, and execution of academic and professional development activities.</li>
+              <li>Represent the club in external Model United Nations and inter-university engagements, strengthening institutional collaboration and outreach.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- CUET Debating Society -->
+        <div class="bg-white border border-slate-200 rounded-xl p-5 shadow-sm flex items-start gap-4">
+          <img src="/images/cuetds.png" alt="CUET Debating Society" class="w-10 h-10 rounded-lg flex-shrink-0 border border-slate-200" onerror="this.src='https://ui-avatars.com/api/?name=DS&background=7c3aed&color=ffffff&bold=true'" />
+          <div class="flex-1 min-w-0">
+            <div class="flex flex-wrap justify-between items-baseline gap-1">
+              <h3 class="font-bold text-sm sm:text-base text-slate-900">Public Relation Secretary · CUET Debating Society</h3>
+              <span class="text-xs text-amber-800 font-semibold">Sep 2026 – Present</span>
+            </div>
+            <ul class="text-xs sm:text-sm text-slate-600 space-y-1 list-disc ml-4 mt-2 leading-relaxed">
+              <li>Direct external relations, institutional communications, and event outreach campaigns across university and national debating circuits.</li>
+              <li>Manage promotional strategy, media partnerships, and public engagement for competitive debate tournaments and workshops.</li>
+            </ul>
+          </div>
+        </div>
+
         <!-- Hult Prize -->
         <div class="bg-white border border-slate-200 rounded-xl p-5 shadow-sm flex items-start gap-4">
           <img src="/images/hult-prize.png" alt="HULT Prize" class="w-10 h-10 rounded-lg flex-shrink-0 border border-slate-200" onerror="this.src='https://ui-avatars.com/api/?name=HP&background=e11d48&color=ffffff&bold=true'" />
           <div class="flex-1 min-w-0">
             <div class="flex flex-wrap justify-between items-baseline gap-1">
               <h3 class="font-bold text-sm sm:text-base text-slate-900">Campus Director · HULT PRIZE at CUET</h3>
-              <span class="text-xs text-blue-600 font-semibold">Sep 2025 – Mar 2026[cite: 1]</span>
+              <span class="text-xs text-amber-800 font-semibold">Sep 2025 – Mar 2026</span>
             </div>
+            
+            <!-- First 2 Visible Bullets -->
             <ul class="text-xs sm:text-sm text-slate-600 space-y-1 list-disc ml-4 mt-2 leading-relaxed">
-              <li>Led 50+ core team members and managed 100+ competing enterprise teams involving 300+ participants[cite: 1].</li>
-              <li>Collaborated with global Hult Prize teams and industry leaders for judging and sponsorships[cite: 1].</li>
+              <li>Led the overall campus execution of the HULT Prize program at CUET, overseeing event planning, coordination, and team management.</li>
+              <li>Led and managed 50+ core team members, overseeing end-to-end execution of the campus program.</li>
             </ul>
+
+            <!-- Collapsed Content Container -->
+            <div class="expandable-content hidden">
+              <ul class="text-xs sm:text-sm text-slate-600 space-y-1 list-disc ml-4 pt-1 leading-relaxed">
+                <li>Coordinated and supervised 100+ competing teams involving 300+ participants, ensuring structured event flow and engagement.</li>
+                <li>Collaborated with national and international HULT Prize teams to ensure smooth program execution and alignment with global standards.</li>
+                <li>Built and maintained partnerships with industry leaders and corporate stakeholders, facilitating judges, guest speakers, and sponsorship engagement.</li>
+              </ul>
+            </div>
+
+            <!-- Toggle Button -->
+            <button type="button" class="expand-btn text-xs font-bold text-amber-800 hover:text-amber-900 mt-2 inline-flex items-center gap-1 focus:outline-none">
+              …see more
+            </button>
           </div>
         </div>
 
@@ -126,11 +225,26 @@ import '../styles/global.css';
           <div class="flex-1 min-w-0">
             <div class="flex flex-wrap justify-between items-baseline gap-1">
               <h3 class="font-bold text-sm sm:text-base text-slate-900">Team Lead · TEDx CUET</h3>
-              <span class="text-xs text-blue-600 font-semibold">Mar 2025 – Jun 2025[cite: 1]</span>
+              <span class="text-xs text-amber-800 font-semibold">Mar 2025 – Jun 2025</span>
             </div>
+            
+            <!-- First 2 Visible Bullets -->
             <ul class="text-xs sm:text-sm text-slate-600 space-y-1 list-disc ml-4 mt-2 leading-relaxed">
-              <li>Coordinated cross-functional teams for event logistics, speaker care, and stage management[cite: 1].</li>
+              <li>Served as a core team lead, ensuring adherence to international TEDx quality standards throughout planning and execution.</li>
+              <li>Coordinated cross-functional teams to support event logistics, speaker management, and overall program delivery.</li>
             </ul>
+
+            <!-- Collapsed Content Container -->
+            <div class="expandable-content hidden">
+              <ul class="text-xs sm:text-sm text-slate-600 space-y-1 list-disc ml-4 pt-1 leading-relaxed">
+                <li>Contributed to structured execution and smooth on-ground coordination of TEDx CUET event activities.</li>
+              </ul>
+            </div>
+
+            <!-- Toggle Button -->
+            <button type="button" class="expand-btn text-xs font-bold text-amber-800 hover:text-amber-900 mt-2 inline-flex items-center gap-1 focus:outline-none">
+              …see more
+            </button>
           </div>
         </div>
 
@@ -140,10 +254,11 @@ import '../styles/global.css';
           <div class="flex-1 min-w-0">
             <div class="flex flex-wrap justify-between items-baseline gap-1">
               <h3 class="font-bold text-sm sm:text-base text-slate-900">Senior Executive · CUET Integration Bee</h3>
-              <span class="text-xs text-blue-600 font-semibold">Feb 2025 – Jan 2026[cite: 1]</span>
+              <span class="text-xs text-amber-800 font-semibold">Feb 2025 – Jan 2026</span>
             </div>
             <ul class="text-xs sm:text-sm text-slate-600 space-y-1 list-disc ml-4 mt-2 leading-relaxed">
-              <li>Organized live problem-solving rounds and hosted the grand final for Bangladesh's first Integration Bee[cite: 1].</li>
+              <li>Contributed to the planning and coordination of the Bangladesh's first-ever Integration Bee, supporting the execution and on-ground operation.</li>
+              <li>Organized and hosted the live problem-solving final round, ensuring smooth execution and seamless transition between segments.</li>
             </ul>
           </div>
         </div>
@@ -153,34 +268,32 @@ import '../styles/global.css';
 
     <!-- 3. Education -->
     <section id="education">
-      <h2 class="text-xl font-black text-slate-900 mb-6">Education</h2>
+      <h2 class="text-xl font-black section-title mb-6">Education</h2>
       <div class="bg-white border border-slate-200 rounded-xl p-6 shadow-sm space-y-6">
         
-        <div class="border-l-2 border-blue-600 pl-4">
+        <div class="border-l-2 border-amber-700 pl-4">
           <div class="flex flex-wrap justify-between items-baseline gap-1">
-            <h3 class="font-bold text-sm sm:text-base text-slate-900">B.Sc. in Materials and Metallurgical Engineering</h3>
-            <span class="text-xs font-semibold text-blue-600 bg-blue-50 px-2.5 py-0.5 rounded-full">2022 – Present[cite: 1]</span>
+            <h3 class="font-bold text-sm sm:text-base text-slate-900">Bachelor of Science (B.Sc.) in Materials and Metallurgical Engineering</h3>
+            <span class="text-xs font-semibold text-amber-800 bg-amber-50 px-2.5 py-0.5 rounded-full">2022 – Present</span>
           </div>
-          <p class="text-xs sm:text-sm text-slate-600 mt-1">Chittagong University of Engineering and Technology (CUET)[cite: 1]</p>
-          <span class="inline-block text-xs font-bold text-teal-800 bg-teal-50 border border-teal-200 px-2 py-0.5 rounded mt-2">Expected Graduation: 2027[cite: 1]</span>
+          <p class="text-xs sm:text-sm text-slate-600 mt-1">Chittagong University of Engineering and Technology (CUET)</p>
+          <span class="inline-block text-xs font-bold text-teal-800 bg-teal-50 border border-teal-200 px-2 py-0.5 rounded mt-2">Expected Graduation: 2027</span>
         </div>
 
         <div class="border-l-2 border-slate-200 pl-4">
           <div class="flex flex-wrap justify-between items-baseline gap-1">
             <h3 class="font-bold text-sm sm:text-base text-slate-900">Higher Secondary Certificate (HSC)</h3>
-            <span class="text-xs font-semibold text-slate-500">2019 – 2021[cite: 1]</span>
+            <span class="text-xs font-semibold text-slate-500">2019 – 2021</span>
           </div>
-          <p class="text-xs sm:text-sm text-slate-600 mt-1">Chittagong College[cite: 1]</p>
-          <span class="inline-block text-xs font-bold text-teal-800 bg-teal-50 border border-teal-200 px-2 py-0.5 rounded mt-2">GPA: 5.00[cite: 1]</span>
+          <p class="text-xs sm:text-sm text-slate-600 mt-1">Chittagong College</p>
         </div>
 
         <div class="border-l-2 border-slate-200 pl-4">
           <div class="flex flex-wrap justify-between items-baseline gap-1">
             <h3 class="font-bold text-sm sm:text-base text-slate-900">Secondary School Certificate (SSC)</h3>
-            <span class="text-xs font-semibold text-slate-500">2014 – 2019[cite: 1]</span>
+            <span class="text-xs font-semibold text-slate-500">2014 – 2019</span>
           </div>
-          <p class="text-xs sm:text-sm text-slate-600 mt-1">Nasirabad Govt. High School[cite: 1]</p>
-          <span class="inline-block text-xs font-bold text-teal-800 bg-teal-50 border border-teal-200 px-2 py-0.5 rounded mt-2">GPA: 5.00[cite: 1]</span>
+          <p class="text-xs sm:text-sm text-slate-600 mt-1">Nasirabad Govt. High School</p>
         </div>
 
       </div>
@@ -188,13 +301,19 @@ import '../styles/global.css';
 
     <!-- 4. Skills -->
     <section id="skills">
-      <h2 class="text-xl font-black text-slate-900 mb-6">Skills & Toolkit</h2>
+      <h2 class="text-xl font-black section-title mb-6">Skills & Toolkit</h2>
       <div class="space-y-4">
         
         <div class="bg-white border border-slate-200 rounded-xl p-5 shadow-sm">
-          <h3 class="text-xs font-extrabold uppercase tracking-wider text-amber-800 mb-3">Technical & Core Engineering</h3>
+          <h3 class="text-xs font-extrabold uppercase tracking-wider text-amber-800 mb-3">Technical & Core Engineering Skills</h3>
           <div class="flex flex-wrap gap-2">
-            {['Metallography', 'Metallurgical Analysis', 'Microstructure Interpretation', 'Failure Analysis & Material Testing', 'Data Analysis', 'Heat Treatment Process'].map(skill => (
+            {[
+              'Metallography', 
+              'Metallurgical Analysis & Microstructure Interpretation', 
+              'Failure Analysis & Material Testing', 
+              'Data Analysis & Interpretation', 
+              'Heat Treatment Process'
+            ].map(skill => (
               <span class="bg-slate-100 hover:bg-slate-900 hover:text-white transition-colors border border-slate-200 text-slate-700 text-xs font-medium px-3 py-1.5 rounded-md cursor-default">{skill}</span>
             ))}
           </div>
@@ -203,16 +322,30 @@ import '../styles/global.css';
         <div class="bg-white border border-slate-200 rounded-xl p-5 shadow-sm">
           <h3 class="text-xs font-extrabold uppercase tracking-wider text-amber-800 mb-3">Software & Analytical Tools</h3>
           <div class="flex flex-wrap gap-2">
-            {['MATLAB', 'VESTA', 'ImageJ', 'Microsoft Office Suite', 'Adobe Illustrator', 'Adobe Photoshop'].map(skill => (
+            {[
+              'MATLAB', 
+              'VESTA', 
+              'ImageJ', 
+              'Microsoft Office Suite (Word, Excel, PowerPoint)', 
+              'Adobe Suite (Illustrator, Photoshop)'
+            ].map(skill => (
               <span class="bg-slate-100 hover:bg-slate-900 hover:text-white transition-colors border border-slate-200 text-slate-700 text-xs font-medium px-3 py-1.5 rounded-md cursor-default">{skill}</span>
             ))}
           </div>
         </div>
 
         <div class="bg-white border border-slate-200 rounded-xl p-5 shadow-sm">
-          <h3 class="text-xs font-extrabold uppercase tracking-wider text-amber-800 mb-3">Professional & Leadership</h3>
+          <h3 class="text-xs font-extrabold uppercase tracking-wider text-amber-800 mb-3">Professional, Leadership & Interpersonal Skills</h3>
           <div class="flex flex-wrap gap-2">
-            {['Project Planning & Coordination', 'Event Management & Execution', 'Leadership & Team Management', 'Strategic Planning & Negotiation', 'Communication & Public Speaking', 'Debate and MUN'].map(skill => (
+            {[
+              'Project Planning & Coordination', 
+              'Event Management & Execution', 
+              'Leadership & Team Management', 
+              'Strategic Planning & Negotiation', 
+              'Communication & Public Speaking', 
+              'Multi-tasking in Dynamic Environments',
+              'Debate and MUN'
+            ].map(skill => (
               <span class="bg-slate-100 hover:bg-slate-900 hover:text-white transition-colors border border-slate-200 text-slate-700 text-xs font-medium px-3 py-1.5 rounded-md cursor-default">{skill}</span>
             ))}
           </div>
@@ -221,11 +354,78 @@ import '../styles/global.css';
       </div>
     </section>
 
+    <!-- 5. Recent Articles & Field Notes -->
+    <section id="blog-preview">
+      <div class="flex items-center justify-between mb-6">
+        <h2 class="text-xl font-black section-title">Writing & Field Notes</h2>
+        <a href="/blog" class="text-xs font-bold text-amber-800 hover:text-amber-900 transition flex items-center gap-1">
+          View All Articles &rarr;
+        </a>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {recentPosts.map((post: any) => {
+          const slug = post.file.split('/').pop().replace('.md', '');
+          return (
+            <article class="bg-white border border-slate-200 rounded-xl p-5 shadow-sm flex flex-col justify-between hover:border-amber-700/50 transition">
+              <div>
+                <div class="flex items-center gap-2 mb-2">
+                  <span class="text-[11px] font-semibold text-amber-800 bg-amber-50 px-2 py-0.5 rounded-full">
+                    {post.frontmatter.pubDate}
+                  </span>
+                </div>
+                <h3 class="font-bold text-base text-slate-900 hover:text-amber-800 transition mb-2">
+                  <a href={`/blog/${slug}`}>{post.frontmatter.title}</a>
+                </h3>
+                <p class="text-xs text-slate-600 line-clamp-3 leading-relaxed mb-4">
+                  {post.frontmatter.description}
+                </p>
+              </div>
+              <a href={`/blog/${slug}`} class="text-xs font-bold text-amber-800 hover:text-amber-900 inline-flex items-center gap-1 mt-auto">
+                Read Article &rarr;
+              </a>
+            </article>
+          );
+        })}
+      </div>
+    </section>
+
   </main>
 
+  <!-- Footer -->
   <footer class="border-t border-slate-200 py-8 bg-white text-center text-xs text-slate-500">
     <p>© 2026 Muhammad Raihanul Karim · Built with Astro & Tailwind CSS</p>
   </footer>
+
+  <!-- Scripts: Mobile Menu & LinkedIn-Style Read More Toggles -->
+  <script>
+    // 1. Mobile Menu Toggle
+    const menuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    menuBtn?.addEventListener('click', () => {
+      mobileMenu?.classList.toggle('hidden');
+    });
+
+    const links = mobileMenu?.querySelectorAll('a');
+    links?.forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu?.classList.add('hidden');
+      });
+    });
+
+    // 2. LinkedIn-Style Expand / Collapse
+    const expandButtons = document.querySelectorAll('.expand-btn');
+    expandButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const content = btn.previousElementSibling;
+        if (content) {
+          const isHidden = content.classList.toggle('hidden');
+          btn.textContent = isHidden ? '…see more' : 'Show less';
+        }
+      });
+    });
+  </script>
 
 </body>
 </html>
