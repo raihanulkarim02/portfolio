@@ -48,7 +48,7 @@ const recentPosts = posts.slice(0, 2);
         <a href="mailto:raihanulkarim02@gmail.com" class="bg-amber-700 hover:bg-amber-600 text-white text-xs px-3.5 py-2 rounded-lg transition font-bold">Contact</a>
       </nav>
 
-      <!-- Mobile Hamburger Button (Three-Line Icon) -->
+      <!-- Mobile Hamburger Button -->
       <button 
         id="mobile-menu-btn" 
         type="button" 
@@ -73,12 +73,12 @@ const recentPosts = posts.slice(0, 2);
     </div>
   </header>
 
-  <!-- Hero Section (Clearer Image Overlay + Screen-Covering Bold Name) -->
+  <!-- Hero Section: Full Screen Height on Mobile & Desktop -->
   <section 
-    class="relative bg-slate-900 text-white py-24 sm:py-36 px-5 bg-cover bg-center"
+    class="relative bg-slate-900 text-white min-h-[calc(100svh-4rem)] flex flex-col justify-center px-5 py-12 bg-cover bg-center"
     style="background-image: linear-gradient(180deg, rgba(15, 23, 42, 0.40) 0%, rgba(15, 23, 42, 0.68) 100%), url('/images/hero-bg.jpg');"
   >
-    <div class="max-w-4xl mx-auto">
+    <div class="max-w-4xl mx-auto w-full">
       
       <!-- Tag Above Name -->
       <div class="inline-flex items-center gap-2 bg-black/40 border border-white/20 px-3.5 py-1.5 rounded-full text-xs font-semibold text-amber-300 mb-6 backdrop-blur-md">
@@ -118,27 +118,27 @@ const recentPosts = posts.slice(0, 2);
           <div class="flex-1 min-w-0">
             <div class="flex flex-wrap justify-between items-baseline gap-1">
               <h3 class="font-bold text-base text-slate-900">Green Lead</h3>
-              <span class="text-xs font-semibold text-slate-500">Aug 2024 – Present</span>
+              <span class="text-xs font-semibold text-slate-500">Aug 2024 – Present[cite: 11]</span>
             </div>
 
-            <!-- Role Details with LinkedIn-Style Read More -->
+            <!-- Role 1: Project Assistant -->
             <div class="mt-4 border-l-2 border-amber-700 pl-3.5 space-y-1">
-              <h4 class="font-bold text-sm text-slate-800">Project Assistant (Promoted from Project Intern)</h4>
-              <p class="text-xs font-semibold text-amber-700">Aug 2024 – Present</p>
+              <h4 class="font-bold text-sm text-slate-800">Project Assistant</h4>
+              <p class="text-xs font-semibold text-amber-700">Mar 2025 – Present · Full-time</p>
               
               <!-- First 2 Visible Bullets -->
               <ul class="text-xs sm:text-sm text-slate-600 space-y-1.5 list-disc ml-4 pt-1 leading-relaxed">
-                <li>Spearheaded and supported planning, coordination, and execution of multiple projects, ensuring on-time delivery and quality outcomes across initiatives.</li>
-                <li>Organized and successfully executed 3+ national summits, training programs, and forums from scratch, collaborating with government and non-government stakeholders for end-to-end implementation.</li>
+                <li>Spearheaded and supported planning, coordination, and execution of multiple projects, ensuring on-time delivery and quality outcomes across initiatives[cite: 11].</li>
+                <li>Organized and successfully executed 3+ national summits, training programs, and forums from scratch, collaborating with government and non-government stakeholders for end-to-end implementation[cite: 11].</li>
               </ul>
 
               <!-- Collapsed Content Container -->
               <div class="expandable-content hidden">
                 <ul class="text-xs sm:text-sm text-slate-600 space-y-1.5 list-disc ml-4 pt-1.5 leading-relaxed">
-                  <li>Led and managed 5+ online and offline workshops and courses, and initiated 3+ competitions and community engagement activities focused on renewable energy, health & safety, and sustainability.</li>
-                  <li>Contributed to Bangladesh's first One Stop Centre For National Renewable Energy Information, "Re-energize Bangladesh," supporting initiative development and operational coordination.</li>
-                  <li>Developed creative content and strategic communication approaches, improving organic reach and audience engagement across platforms.</li>
-                  <li>Collaborated with cross-functional teams and stakeholders, ensuring smooth workflow, alignment of objectives, and effective communication across projects.</li>
+                  <li>Led and managed 5+ online and offline workshops and courses, and initiated 3+ competitions and community engagement activities focused on renewable energy, health & safety, and sustainability[cite: 11].</li>
+                  <li>Contributed to Bangladesh's first One Stop Centre For National Renewable Energy Information, "Re-energize Bangladesh," supporting initiative development and operational coordination[cite: 11].</li>
+                  <li>Developed creative content and strategic communication approaches, improving organic reach and audience engagement across platforms[cite: 11].</li>
+                  <li>Collaborated with cross-functional teams and stakeholders, ensuring smooth workflow, alignment of objectives, and effective communication across projects[cite: 11].</li>
                 </ul>
               </div>
 
@@ -146,6 +146,15 @@ const recentPosts = posts.slice(0, 2);
               <button type="button" class="expand-btn text-xs font-bold text-amber-800 hover:text-amber-900 mt-2 inline-flex items-center gap-1 focus:outline-none">
                 …see more
               </button>
+            </div>
+
+            <!-- Role 2: Project Intern -->
+            <div class="mt-5 border-l-2 border-slate-300 pl-3.5 space-y-1">
+              <h4 class="font-bold text-sm text-slate-800">Project Intern</h4>
+              <p class="text-xs font-semibold text-slate-500">Aug 2024 – Mar 2025 · 8 mos</p>
+              <ul class="text-xs sm:text-sm text-slate-600 space-y-1.5 list-disc ml-4 pt-1 leading-relaxed">
+                <li>Supported project planning, content creation, and cross-functional team coordination across internal programs.</li>
+              </ul>
             </div>
 
           </div>
@@ -158,22 +167,76 @@ const recentPosts = posts.slice(0, 2);
       <h2 class="text-xl font-black section-title mb-6">Leadership & Extracurricular Activities</h2>
       <div class="space-y-4">
         
-        <!-- CUET Model United Nations Club -->
+        <!-- 1. Campus Director (Hult Prize) -->
+        <div class="bg-white border border-slate-200 rounded-xl p-5 shadow-sm flex items-start gap-4">
+          <img src="/images/hult-prize.png" alt="HULT Prize" class="w-10 h-10 rounded-lg flex-shrink-0 border border-slate-200" onerror="this.src='https://ui-avatars.com/api/?name=HP&background=e11d48&color=ffffff&bold=true'" />
+          <div class="flex-1 min-w-0">
+            <div class="flex flex-wrap justify-between items-baseline gap-1">
+              <h3 class="font-bold text-sm sm:text-base text-slate-900">Campus Director · HULT PRIZE at CUET</h3>
+              <span class="text-xs text-amber-800 font-semibold">Sep 2025 – Mar 2026[cite: 11]</span>
+            </div>
+            
+            <ul class="text-xs sm:text-sm text-slate-600 space-y-1 list-disc ml-4 mt-2 leading-relaxed">
+              <li>Led the overall campus execution of the HULT Prize program at CUET, overseeing event planning, coordination, and team management[cite: 11].</li>
+              <li>Led and managed 50+ core team members, overseeing end-to-end execution of the campus program[cite: 11].</li>
+            </ul>
+
+            <div class="expandable-content hidden">
+              <ul class="text-xs sm:text-sm text-slate-600 space-y-1 list-disc ml-4 pt-1 leading-relaxed">
+                <li>Coordinated and supervised 100+ competing teams involving 300+ participants, ensuring structured event flow and engagement[cite: 11].</li>
+                <li>Collaborated with national and international HULT Prize teams to ensure smooth program execution and alignment with global standards[cite: 11].</li>
+                <li>Built and maintained partnerships with industry leaders and corporate stakeholders, facilitating judges, guest speakers, and sponsorship engagement[cite: 11].</li>
+              </ul>
+            </div>
+
+            <button type="button" class="expand-btn text-xs font-bold text-amber-800 hover:text-amber-900 mt-2 inline-flex items-center gap-1 focus:outline-none">
+              …see more
+            </button>
+          </div>
+        </div>
+
+        <!-- 2. Vice President (CUET Model United Nations Club) -->
         <div class="bg-white border border-slate-200 rounded-xl p-5 shadow-sm flex items-start gap-4">
           <img src="/images/cuetmunc.png" alt="CUETMUNC" class="w-10 h-10 rounded-lg flex-shrink-0 border border-slate-200" onerror="this.src='https://ui-avatars.com/api/?name=MUN&background=0284c7&color=ffffff&bold=true'" />
           <div class="flex-1 min-w-0">
             <div class="flex flex-wrap justify-between items-baseline gap-1">
               <h3 class="font-bold text-sm sm:text-base text-slate-900">Vice President (Delegate) · CUET Model United Nations Club</h3>
-              <span class="text-xs text-amber-800 font-semibold">Sep 2026 – Present</span>
+              <span class="text-xs text-amber-800 font-semibold">Sep 2026 – Present[cite: 11]</span>
             </div>
             <ul class="text-xs sm:text-sm text-slate-600 space-y-1 list-disc ml-4 mt-2 leading-relaxed">
-              <li>Lead and coordinate club initiatives, supporting strategic planning, member engagement, and execution of academic and professional development activities.</li>
-              <li>Represent the club in external Model United Nations and inter-university engagements, strengthening institutional collaboration and outreach.</li>
+              <li>Lead and coordinate club initiatives, supporting strategic planning, member engagement, and execution of academic and professional development activities[cite: 11].</li>
+              <li>Represent the club in external Model United Nations and inter-university engagements, strengthening institutional collaboration and outreach[cite: 11].</li>
             </ul>
           </div>
         </div>
 
-        <!-- CUET Debating Society -->
+        <!-- 3. Team Lead (TEDx CUET) -->
+        <div class="bg-white border border-slate-200 rounded-xl p-5 shadow-sm flex items-start gap-4">
+          <img src="/images/tedx.png" alt="TEDx CUET" class="w-10 h-10 rounded-lg flex-shrink-0 border border-slate-200" onerror="this.src='https://ui-avatars.com/api/?name=TX&background=dc2626&color=ffffff&bold=true'" />
+          <div class="flex-1 min-w-0">
+            <div class="flex flex-wrap justify-between items-baseline gap-1">
+              <h3 class="font-bold text-sm sm:text-base text-slate-900">Team Lead · TEDx CUET</h3>
+              <span class="text-xs text-amber-800 font-semibold">Mar 2025 – Jun 2025[cite: 11]</span>
+            </div>
+            
+            <ul class="text-xs sm:text-sm text-slate-600 space-y-1 list-disc ml-4 mt-2 leading-relaxed">
+              <li>Served as a core team lead, ensuring adherence to international TEDx quality standards throughout planning and execution[cite: 11].</li>
+              <li>Coordinated cross-functional teams to support event logistics, speaker management, and overall program delivery[cite: 11].</li>
+            </ul>
+
+            <div class="expandable-content hidden">
+              <ul class="text-xs sm:text-sm text-slate-600 space-y-1 list-disc ml-4 pt-1 leading-relaxed">
+                <li>Contributed to structured execution and smooth on-ground coordination of TEDx CUET event activities[cite: 11].</li>
+              </ul>
+            </div>
+
+            <button type="button" class="expand-btn text-xs font-bold text-amber-800 hover:text-amber-900 mt-2 inline-flex items-center gap-1 focus:outline-none">
+              …see more
+            </button>
+          </div>
+        </div>
+
+        <!-- 4. Public Relation Secretary (CUET Debating Society) -->
         <div class="bg-white border border-slate-200 rounded-xl p-5 shadow-sm flex items-start gap-4">
           <img src="/images/cuetds.png" alt="CUET Debating Society" class="w-10 h-10 rounded-lg flex-shrink-0 border border-slate-200" onerror="this.src='https://ui-avatars.com/api/?name=DS&background=7c3aed&color=ffffff&bold=true'" />
           <div class="flex-1 min-w-0">
@@ -188,77 +251,17 @@ const recentPosts = posts.slice(0, 2);
           </div>
         </div>
 
-        <!-- Hult Prize -->
-        <div class="bg-white border border-slate-200 rounded-xl p-5 shadow-sm flex items-start gap-4">
-          <img src="/images/hult-prize.png" alt="HULT Prize" class="w-10 h-10 rounded-lg flex-shrink-0 border border-slate-200" onerror="this.src='https://ui-avatars.com/api/?name=HP&background=e11d48&color=ffffff&bold=true'" />
-          <div class="flex-1 min-w-0">
-            <div class="flex flex-wrap justify-between items-baseline gap-1">
-              <h3 class="font-bold text-sm sm:text-base text-slate-900">Campus Director · HULT PRIZE at CUET</h3>
-              <span class="text-xs text-amber-800 font-semibold">Sep 2025 – Mar 2026</span>
-            </div>
-            
-            <!-- First 2 Visible Bullets -->
-            <ul class="text-xs sm:text-sm text-slate-600 space-y-1 list-disc ml-4 mt-2 leading-relaxed">
-              <li>Led the overall campus execution of the HULT Prize program at CUET, overseeing event planning, coordination, and team management.</li>
-              <li>Led and managed 50+ core team members, overseeing end-to-end execution of the campus program.</li>
-            </ul>
-
-            <!-- Collapsed Content Container -->
-            <div class="expandable-content hidden">
-              <ul class="text-xs sm:text-sm text-slate-600 space-y-1 list-disc ml-4 pt-1 leading-relaxed">
-                <li>Coordinated and supervised 100+ competing teams involving 300+ participants, ensuring structured event flow and engagement.</li>
-                <li>Collaborated with national and international HULT Prize teams to ensure smooth program execution and alignment with global standards.</li>
-                <li>Built and maintained partnerships with industry leaders and corporate stakeholders, facilitating judges, guest speakers, and sponsorship engagement.</li>
-              </ul>
-            </div>
-
-            <!-- Toggle Button -->
-            <button type="button" class="expand-btn text-xs font-bold text-amber-800 hover:text-amber-900 mt-2 inline-flex items-center gap-1 focus:outline-none">
-              …see more
-            </button>
-          </div>
-        </div>
-
-        <!-- TEDx CUET -->
-        <div class="bg-white border border-slate-200 rounded-xl p-5 shadow-sm flex items-start gap-4">
-          <img src="/images/tedx.png" alt="TEDx CUET" class="w-10 h-10 rounded-lg flex-shrink-0 border border-slate-200" onerror="this.src='https://ui-avatars.com/api/?name=TX&background=dc2626&color=ffffff&bold=true'" />
-          <div class="flex-1 min-w-0">
-            <div class="flex flex-wrap justify-between items-baseline gap-1">
-              <h3 class="font-bold text-sm sm:text-base text-slate-900">Team Lead · TEDx CUET</h3>
-              <span class="text-xs text-amber-800 font-semibold">Mar 2025 – Jun 2025</span>
-            </div>
-            
-            <!-- First 2 Visible Bullets -->
-            <ul class="text-xs sm:text-sm text-slate-600 space-y-1 list-disc ml-4 mt-2 leading-relaxed">
-              <li>Served as a core team lead, ensuring adherence to international TEDx quality standards throughout planning and execution.</li>
-              <li>Coordinated cross-functional teams to support event logistics, speaker management, and overall program delivery.</li>
-            </ul>
-
-            <!-- Collapsed Content Container -->
-            <div class="expandable-content hidden">
-              <ul class="text-xs sm:text-sm text-slate-600 space-y-1 list-disc ml-4 pt-1 leading-relaxed">
-                <li>Contributed to structured execution and smooth on-ground coordination of TEDx CUET event activities.</li>
-              </ul>
-            </div>
-
-            <!-- Toggle Button -->
-            <button type="button" class="expand-btn text-xs font-bold text-amber-800 hover:text-amber-900 mt-2 inline-flex items-center gap-1 focus:outline-none">
-              …see more
-            </button>
-          </div>
-        </div>
-
-        <!-- CUET Integration Bee -->
+        <!-- 5. Senior Executive (CUET Integration Bee) -->
         <div class="bg-white border border-slate-200 rounded-xl p-5 shadow-sm flex items-start gap-4">
           <img src="/images/integration-bee.png" alt="Integration Bee" class="w-10 h-10 rounded-lg flex-shrink-0 border border-slate-200" onerror="this.src='https://ui-avatars.com/api/?name=IB&background=4f46e5&color=ffffff&bold=true'" />
           <div class="flex-1 min-w-0">
             <div class="flex flex-wrap justify-between items-baseline gap-1">
               <h3 class="font-bold text-sm sm:text-base text-slate-900">Senior Executive · CUET Integration Bee</h3>
-              <span class="text-xs text-amber-800 font-semibold">Feb 2025 – Jan 2026</span>
+              <span class="text-xs text-amber-800 font-semibold">Feb 2025 – Jan 2026[cite: 11]</span>
             </div>
             <ul class="text-xs sm:text-sm text-slate-600 space-y-1 list-disc ml-4 mt-2 leading-relaxed">
-              <li>Contributed to the planning and coordination of the Bangladesh's first-ever Integration Bee, supporting the execution and on-ground operation.</li>
-              <li>Organized and hosted the live problem-solving final round, ensuring smooth execution and seamless transition between segments.</li>
+              <li>Contributed to the planning and coordination of the Bangladesh's first-ever Integration Bee, supporting the execution and on-ground operation[cite: 11].</li>
+              <li>Organized and hosted the live problem-solving final round, ensuring smooth execution and seamless transition between segments[cite: 11].</li>
             </ul>
           </div>
         </div>
@@ -274,26 +277,26 @@ const recentPosts = posts.slice(0, 2);
         <div class="border-l-2 border-amber-700 pl-4">
           <div class="flex flex-wrap justify-between items-baseline gap-1">
             <h3 class="font-bold text-sm sm:text-base text-slate-900">Bachelor of Science (B.Sc.) in Materials and Metallurgical Engineering</h3>
-            <span class="text-xs font-semibold text-amber-800 bg-amber-50 px-2.5 py-0.5 rounded-full">2022 – Present</span>
+            <span class="text-xs font-semibold text-amber-800 bg-amber-50 px-2.5 py-0.5 rounded-full">2022 – Present[cite: 11]</span>
           </div>
-          <p class="text-xs sm:text-sm text-slate-600 mt-1">Chittagong University of Engineering and Technology (CUET)</p>
-          <span class="inline-block text-xs font-bold text-teal-800 bg-teal-50 border border-teal-200 px-2 py-0.5 rounded mt-2">Expected Graduation: 2027</span>
+          <p class="text-xs sm:text-sm text-slate-600 mt-1">Chittagong University of Engineering and Technology (CUET)[cite: 11]</p>
+          <span class="inline-block text-xs font-bold text-teal-800 bg-teal-50 border border-teal-200 px-2 py-0.5 rounded mt-2">Expected Graduation: 2027[cite: 11]</span>
         </div>
 
         <div class="border-l-2 border-slate-200 pl-4">
           <div class="flex flex-wrap justify-between items-baseline gap-1">
             <h3 class="font-bold text-sm sm:text-base text-slate-900">Higher Secondary Certificate (HSC)</h3>
-            <span class="text-xs font-semibold text-slate-500">2019 – 2021</span>
+            <span class="text-xs font-semibold text-slate-500">2019 – 2021[cite: 11]</span>
           </div>
-          <p class="text-xs sm:text-sm text-slate-600 mt-1">Chittagong College</p>
+          <p class="text-xs sm:text-sm text-slate-600 mt-1">Chittagong College[cite: 11]</p>
         </div>
 
         <div class="border-l-2 border-slate-200 pl-4">
           <div class="flex flex-wrap justify-between items-baseline gap-1">
             <h3 class="font-bold text-sm sm:text-base text-slate-900">Secondary School Certificate (SSC)</h3>
-            <span class="text-xs font-semibold text-slate-500">2014 – 2019</span>
+            <span class="text-xs font-semibold text-slate-500">2014 – 2019[cite: 11]</span>
           </div>
-          <p class="text-xs sm:text-sm text-slate-600 mt-1">Nasirabad Govt. High School</p>
+          <p class="text-xs sm:text-sm text-slate-600 mt-1">Nasirabad Govt. High School[cite: 11]</p>
         </div>
 
       </div>
@@ -392,12 +395,20 @@ const recentPosts = posts.slice(0, 2);
 
   </main>
 
-  <!-- Footer -->
-  <footer class="border-t border-slate-200 py-8 bg-white text-center text-xs text-slate-500">
-    <p>© 2026 Muhammad Raihanul Karim · Built with Astro & Tailwind CSS</p>
+  <!-- Dark Footer with Direct Contact Action -->
+  <footer class="border-t border-neutral-800 py-10 bg-neutral-950 text-slate-400">
+    <div class="max-w-4xl mx-auto px-5 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <p class="text-xs">© 2026 Muhammad Raihanul Karim</p>
+      <a 
+        href="mailto:raihanulkarim02@gmail.com" 
+        class="bg-amber-700 hover:bg-amber-600 text-white text-xs px-4 py-2 rounded-lg transition font-bold"
+      >
+        Get in Touch
+      </a>
+    </div>
   </footer>
 
-  <!-- Scripts: Mobile Menu & LinkedIn-Style Read More Toggles -->
+  <!-- Scripts: Mobile Menu & Read More Toggles -->
   <script>
     // 1. Mobile Menu Toggle
     const menuBtn = document.getElementById('mobile-menu-btn');
