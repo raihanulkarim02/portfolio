@@ -19,11 +19,21 @@ const recentPosts = posts.slice(0, 2);
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,400&display=swap" rel="stylesheet">
   <style>
-    body { font-family: 'Lato', sans-serif; }
-    .section-title { color: #d2691e; } /* Chocolate heading */
+    body { 
+      font-family: 'Lato', sans-serif; 
+    }
+    .section-title { 
+      color: #d2691e; /* Chocolate heading */
+    }
+    /* Subtle, low-contrast engineering dot pattern */
+    .bg-grid-dots {
+      background-color: #f8fafc;
+      background-image: radial-gradient(rgba(100, 116, 139, 0.16) 1.2px, transparent 1.2px);
+      background-size: 24px 24px;
+    }
   </style>
 </head>
-<body class="bg-slate-50 text-slate-900 antialiased selection:bg-amber-800 selection:text-white">
+<body class="bg-grid-dots text-slate-900 antialiased selection:bg-amber-800 selection:text-white">
 
   <!-- Dark Top Navigation with Mobile Hamburger Menu -->
   <header class="sticky top-0 z-50 bg-neutral-950/95 backdrop-blur-md border-b border-neutral-800 text-white">
@@ -40,6 +50,7 @@ const recentPosts = posts.slice(0, 2);
 
       <!-- Desktop Navigation Menu -->
       <nav class="hidden md:flex items-center gap-6 text-sm font-semibold text-slate-300">
+        <a href="#about" class="hover:text-amber-400 transition">About</a>
         <a href="#experience" class="hover:text-amber-400 transition">Experience</a>
         <a href="#leadership" class="hover:text-amber-400 transition">Leadership</a>
         <a href="#education" class="hover:text-amber-400 transition">Education</a>
@@ -64,6 +75,7 @@ const recentPosts = posts.slice(0, 2);
 
     <!-- Mobile Dropdown Menu -->
     <div id="mobile-menu" class="hidden md:hidden bg-neutral-900 border-b border-neutral-800 px-5 py-4 space-y-3">
+      <a href="#about" class="block text-sm font-semibold text-slate-200 hover:text-amber-400 transition py-1">About</a>
       <a href="#experience" class="block text-sm font-semibold text-slate-200 hover:text-amber-400 transition py-1">Experience</a>
       <a href="#leadership" class="block text-sm font-semibold text-slate-200 hover:text-amber-400 transition py-1">Leadership</a>
       <a href="#education" class="block text-sm font-semibold text-slate-200 hover:text-amber-400 transition py-1">Education</a>
@@ -93,7 +105,7 @@ const recentPosts = posts.slice(0, 2);
 
       <!-- Action Buttons -->
       <div class="flex flex-wrap gap-3">
-        <a href="#experience" class="bg-amber-700 hover:bg-amber-600 text-white text-sm font-bold px-5 py-2.5 rounded-lg transition shadow-md">Explore Experience &darr;</a>
+        <a href="#about" class="bg-amber-700 hover:bg-amber-600 text-white text-sm font-bold px-5 py-2.5 rounded-lg transition shadow-md">About Me &darr;</a>
         <a href="/blog" class="bg-black/40 hover:bg-black/60 text-white border border-white/30 text-sm font-bold px-5 py-2.5 rounded-lg transition backdrop-blur-md">Read Blog Posts &rarr;</a>
       </div>
 
@@ -103,11 +115,56 @@ const recentPosts = posts.slice(0, 2);
   <!-- Main Content Container -->
   <main class="max-w-4xl mx-auto px-5 py-16 space-y-16">
 
+    <!-- About Section: Styled with Large Portrait & Chocolate Wave Shape -->
+    <section id="about">
+      <h2 class="text-xl font-black section-title mb-6">About Me</h2>
+
+      <div class="bg-white/95 backdrop-blur-sm border border-slate-200 rounded-2xl shadow-sm overflow-hidden">
+        <div class="grid grid-cols-1 md:grid-cols-12 items-end">
+          
+          <!-- Left Column: Biography Text -->
+          <div class="p-6 sm:p-10 md:col-span-7 space-y-4 text-[14px] sm:text-[15px] text-slate-700 leading-relaxed">
+            <p>
+              Hello! I'm Raihanul Karim, an aspiring engineering student at Chittagong University of Engineering and Technology (CUET). I define myself as a restless, curious and a bit perfectionist. And this tends me to dive deep into complex problems, dissecting them until I find elegant solutions. I love to travel, read books, and explore diverse fields to gather new experiences, truly finding the meaning of life through these activities.
+            </p>
+            <p>
+              I am passionate about doing what I love, and this has led me to the exciting fields of graphic design and digital marketing. I do play with colors, shapes, elements and as well as developing strategic planning of marketing. These fields allow me to blend creativity with analytical thinking, where I find my sweet spot!
+            </p>
+            <p>
+              Problem-solving is another interest of mine. I view problems as challenges and try to use creative, positive and determined approach to solve it. In addition to my academic and creative pursuits, I believe in myself as a strong team player and organizer. My involvement in various events, campaigns, and initiatives has honed my leadership skills and ability to guide teams toward success. I thrive in leadership roles, where I can effectively manage multiple tasks simultaneously with a high degree of accuracy, ensuring that every project I work on is completed to the highest standard.
+            </p>
+          </div>
+
+          <!-- Right Column: Transparent Cutout with Organic Wave Backdrop -->
+          <div class="relative w-full md:col-span-5 flex items-end justify-center self-end overflow-hidden pt-6 md:pt-0">
+            <!-- Organic Chocolate Curved Shape -->
+            <svg 
+              class="absolute bottom-0 right-0 w-[115%] h-[80%] text-[#6f4236] z-0 pointer-events-none" 
+              viewBox="0 0 320 320" 
+              fill="currentColor" 
+              preserveAspectRatio="none"
+            >
+              <path d="M0,200 C50,200 80,165 140,135 C200,105 250,85 290,105 C310,115 320,135 320,165 L320,320 L0,320 Z" />
+            </svg>
+
+            <!-- Cutout Profile Photo -->
+            <img 
+              src="/images/profile.png" 
+              alt="Muhammad Raihanul Karim" 
+              class="relative z-10 w-[240px] sm:w-[280px] md:w-[310px] h-auto object-contain drop-shadow-[0_12px_15px_rgba(0,0,0,0.30)] block align-bottom" 
+              onerror="this.src='/images/profile.jpg'"
+            />
+          </div>
+
+        </div>
+      </div>
+    </section>
+
     <!-- 1. Professional and Industrial -->
     <section id="experience">
       <h2 class="text-xl font-black section-title mb-6">Professional and Industrial</h2>
 
-      <div class="bg-white border border-slate-200 rounded-xl p-6 shadow-sm">
+      <div class="bg-white/95 backdrop-blur-sm border border-slate-200 rounded-xl p-6 shadow-sm">
         <div class="flex items-start gap-4">
           <img 
             src="/images/green-lead.png" 
@@ -118,7 +175,7 @@ const recentPosts = posts.slice(0, 2);
           <div class="flex-1 min-w-0">
             <div class="flex flex-wrap justify-between items-baseline gap-1">
               <h3 class="font-bold text-base text-slate-900">Green Lead</h3>
-              <span class="text-xs font-semibold text-slate-500">Aug 2024 – Present[cite: 11]</span>
+              <span class="text-xs font-semibold text-slate-500">Aug 2024 – Present</span>
             </div>
 
             <!-- Role 1: Project Assistant -->
@@ -128,17 +185,17 @@ const recentPosts = posts.slice(0, 2);
               
               <!-- First 2 Visible Bullets -->
               <ul class="text-xs sm:text-sm text-slate-600 space-y-1.5 list-disc ml-4 pt-1 leading-relaxed">
-                <li>Spearheaded and supported planning, coordination, and execution of multiple projects, ensuring on-time delivery and quality outcomes across initiatives[cite: 11].</li>
-                <li>Organized and successfully executed 3+ national summits, training programs, and forums from scratch, collaborating with government and non-government stakeholders for end-to-end implementation[cite: 11].</li>
+                <li>Spearheaded and supported planning, coordination, and execution of multiple projects, ensuring on-time delivery and quality outcomes across initiatives.</li>
+                <li>Organized and successfully executed 3+ national summits, training programs, and forums from scratch, collaborating with government and non-government stakeholders for end-to-end implementation.</li>
               </ul>
 
               <!-- Collapsed Content Container -->
               <div class="expandable-content hidden">
                 <ul class="text-xs sm:text-sm text-slate-600 space-y-1.5 list-disc ml-4 pt-1.5 leading-relaxed">
-                  <li>Led and managed 5+ online and offline workshops and courses, and initiated 3+ competitions and community engagement activities focused on renewable energy, health & safety, and sustainability[cite: 11].</li>
-                  <li>Contributed to Bangladesh's first One Stop Centre For National Renewable Energy Information, "Re-energize Bangladesh," supporting initiative development and operational coordination[cite: 11].</li>
-                  <li>Developed creative content and strategic communication approaches, improving organic reach and audience engagement across platforms[cite: 11].</li>
-                  <li>Collaborated with cross-functional teams and stakeholders, ensuring smooth workflow, alignment of objectives, and effective communication across projects[cite: 11].</li>
+                  <li>Led and managed 5+ online and offline workshops and courses, and initiated 3+ competitions and community engagement activities focused on renewable energy, health & safety, and sustainability.</li>
+                  <li>Contributed to Bangladesh's first One Stop Centre For National Renewable Energy Information, "Re-energize Bangladesh," supporting initiative development and operational coordination.</li>
+                  <li>Developed creative content and strategic communication approaches, improving organic reach and audience engagement across platforms.</li>
+                  <li>Collaborated with cross-functional teams and stakeholders, ensuring smooth workflow, alignment of objectives, and effective communication across projects.</li>
                 </ul>
               </div>
 
@@ -168,24 +225,24 @@ const recentPosts = posts.slice(0, 2);
       <div class="space-y-4">
         
         <!-- 1. Campus Director (Hult Prize) -->
-        <div class="bg-white border border-slate-200 rounded-xl p-5 shadow-sm flex items-start gap-4">
+        <div class="bg-white/95 backdrop-blur-sm border border-slate-200 rounded-xl p-5 shadow-sm flex items-start gap-4">
           <img src="/images/hult-prize.png" alt="HULT Prize" class="w-10 h-10 rounded-lg flex-shrink-0 border border-slate-200" onerror="this.src='https://ui-avatars.com/api/?name=HP&background=e11d48&color=ffffff&bold=true'" />
           <div class="flex-1 min-w-0">
             <div class="flex flex-wrap justify-between items-baseline gap-1">
               <h3 class="font-bold text-sm sm:text-base text-slate-900">Campus Director · HULT PRIZE at CUET</h3>
-              <span class="text-xs text-amber-800 font-semibold">Sep 2025 – Mar 2026[cite: 11]</span>
+              <span class="text-xs text-amber-800 font-semibold">Sep 2025 – Mar 2026</span>
             </div>
             
             <ul class="text-xs sm:text-sm text-slate-600 space-y-1 list-disc ml-4 mt-2 leading-relaxed">
-              <li>Led the overall campus execution of the HULT Prize program at CUET, overseeing event planning, coordination, and team management[cite: 11].</li>
-              <li>Led and managed 50+ core team members, overseeing end-to-end execution of the campus program[cite: 11].</li>
+              <li>Led the overall campus execution of the HULT Prize program at CUET, overseeing event planning, coordination, and team management.</li>
+              <li>Led and managed 50+ core team members, overseeing end-to-end execution of the campus program.</li>
             </ul>
 
             <div class="expandable-content hidden">
               <ul class="text-xs sm:text-sm text-slate-600 space-y-1 list-disc ml-4 pt-1 leading-relaxed">
-                <li>Coordinated and supervised 100+ competing teams involving 300+ participants, ensuring structured event flow and engagement[cite: 11].</li>
-                <li>Collaborated with national and international HULT Prize teams to ensure smooth program execution and alignment with global standards[cite: 11].</li>
-                <li>Built and maintained partnerships with industry leaders and corporate stakeholders, facilitating judges, guest speakers, and sponsorship engagement[cite: 11].</li>
+                <li>Coordinated and supervised 100+ competing teams involving 300+ participants, ensuring structured event flow and engagement.</li>
+                <li>Collaborated with national and international HULT Prize teams to ensure smooth program execution and alignment with global standards.</li>
+                <li>Built and maintained partnerships with industry leaders and corporate stakeholders, facilitating judges, guest speakers, and sponsorship engagement.</li>
               </ul>
             </div>
 
@@ -196,37 +253,37 @@ const recentPosts = posts.slice(0, 2);
         </div>
 
         <!-- 2. Vice President (CUET Model United Nations Club) -->
-        <div class="bg-white border border-slate-200 rounded-xl p-5 shadow-sm flex items-start gap-4">
+        <div class="bg-white/95 backdrop-blur-sm border border-slate-200 rounded-xl p-5 shadow-sm flex items-start gap-4">
           <img src="/images/cuetmunc.png" alt="CUETMUNC" class="w-10 h-10 rounded-lg flex-shrink-0 border border-slate-200" onerror="this.src='https://ui-avatars.com/api/?name=MUN&background=0284c7&color=ffffff&bold=true'" />
           <div class="flex-1 min-w-0">
             <div class="flex flex-wrap justify-between items-baseline gap-1">
               <h3 class="font-bold text-sm sm:text-base text-slate-900">Vice President (Delegate) · CUET Model United Nations Club</h3>
-              <span class="text-xs text-amber-800 font-semibold">Sep 2026 – Present[cite: 11]</span>
+              <span class="text-xs text-amber-800 font-semibold">Sep 2026 – Present</span>
             </div>
             <ul class="text-xs sm:text-sm text-slate-600 space-y-1 list-disc ml-4 mt-2 leading-relaxed">
-              <li>Lead and coordinate club initiatives, supporting strategic planning, member engagement, and execution of academic and professional development activities[cite: 11].</li>
-              <li>Represent the club in external Model United Nations and inter-university engagements, strengthening institutional collaboration and outreach[cite: 11].</li>
+              <li>Lead and coordinate club initiatives, supporting strategic planning, member engagement, and execution of academic and professional development activities.</li>
+              <li>Represent the club in external Model United Nations and inter-university engagements, strengthening institutional collaboration and outreach.</li>
             </ul>
           </div>
         </div>
 
         <!-- 3. Team Lead (TEDx CUET) -->
-        <div class="bg-white border border-slate-200 rounded-xl p-5 shadow-sm flex items-start gap-4">
+        <div class="bg-white/95 backdrop-blur-sm border border-slate-200 rounded-xl p-5 shadow-sm flex items-start gap-4">
           <img src="/images/tedx.png" alt="TEDx CUET" class="w-10 h-10 rounded-lg flex-shrink-0 border border-slate-200" onerror="this.src='https://ui-avatars.com/api/?name=TX&background=dc2626&color=ffffff&bold=true'" />
           <div class="flex-1 min-w-0">
             <div class="flex flex-wrap justify-between items-baseline gap-1">
               <h3 class="font-bold text-sm sm:text-base text-slate-900">Team Lead · TEDx CUET</h3>
-              <span class="text-xs text-amber-800 font-semibold">Mar 2025 – Jun 2025[cite: 11]</span>
+              <span class="text-xs text-amber-800 font-semibold">Mar 2025 – Jun 2025</span>
             </div>
             
             <ul class="text-xs sm:text-sm text-slate-600 space-y-1 list-disc ml-4 mt-2 leading-relaxed">
-              <li>Served as a core team lead, ensuring adherence to international TEDx quality standards throughout planning and execution[cite: 11].</li>
-              <li>Coordinated cross-functional teams to support event logistics, speaker management, and overall program delivery[cite: 11].</li>
+              <li>Served as a core team lead, ensuring adherence to international TEDx quality standards throughout planning and execution.</li>
+              <li>Coordinated cross-functional teams to support event logistics, speaker management, and overall program delivery.</li>
             </ul>
 
             <div class="expandable-content hidden">
               <ul class="text-xs sm:text-sm text-slate-600 space-y-1 list-disc ml-4 pt-1 leading-relaxed">
-                <li>Contributed to structured execution and smooth on-ground coordination of TEDx CUET event activities[cite: 11].</li>
+                <li>Contributed to structured execution and smooth on-ground coordination of TEDx CUET event activities.</li>
               </ul>
             </div>
 
@@ -237,7 +294,7 @@ const recentPosts = posts.slice(0, 2);
         </div>
 
         <!-- 4. Public Relation Secretary (CUET Debating Society) -->
-        <div class="bg-white border border-slate-200 rounded-xl p-5 shadow-sm flex items-start gap-4">
+        <div class="bg-white/95 backdrop-blur-sm border border-slate-200 rounded-xl p-5 shadow-sm flex items-start gap-4">
           <img src="/images/cuetds.png" alt="CUET Debating Society" class="w-10 h-10 rounded-lg flex-shrink-0 border border-slate-200" onerror="this.src='https://ui-avatars.com/api/?name=DS&background=7c3aed&color=ffffff&bold=true'" />
           <div class="flex-1 min-w-0">
             <div class="flex flex-wrap justify-between items-baseline gap-1">
@@ -252,16 +309,16 @@ const recentPosts = posts.slice(0, 2);
         </div>
 
         <!-- 5. Senior Executive (CUET Integration Bee) -->
-        <div class="bg-white border border-slate-200 rounded-xl p-5 shadow-sm flex items-start gap-4">
+        <div class="bg-white/95 backdrop-blur-sm border border-slate-200 rounded-xl p-5 shadow-sm flex items-start gap-4">
           <img src="/images/integration-bee.png" alt="Integration Bee" class="w-10 h-10 rounded-lg flex-shrink-0 border border-slate-200" onerror="this.src='https://ui-avatars.com/api/?name=IB&background=4f46e5&color=ffffff&bold=true'" />
           <div class="flex-1 min-w-0">
             <div class="flex flex-wrap justify-between items-baseline gap-1">
               <h3 class="font-bold text-sm sm:text-base text-slate-900">Senior Executive · CUET Integration Bee</h3>
-              <span class="text-xs text-amber-800 font-semibold">Feb 2025 – Jan 2026[cite: 11]</span>
+              <span class="text-xs text-amber-800 font-semibold">Feb 2025 – Jan 2026</span>
             </div>
             <ul class="text-xs sm:text-sm text-slate-600 space-y-1 list-disc ml-4 mt-2 leading-relaxed">
-              <li>Contributed to the planning and coordination of the Bangladesh's first-ever Integration Bee, supporting the execution and on-ground operation[cite: 11].</li>
-              <li>Organized and hosted the live problem-solving final round, ensuring smooth execution and seamless transition between segments[cite: 11].</li>
+              <li>Contributed to the planning and coordination of the Bangladesh's first-ever Integration Bee, supporting the execution and on-ground operation.</li>
+              <li>Organized and hosted the live problem-solving final round, ensuring smooth execution and seamless transition between segments.</li>
             </ul>
           </div>
         </div>
@@ -272,31 +329,31 @@ const recentPosts = posts.slice(0, 2);
     <!-- 3. Education -->
     <section id="education">
       <h2 class="text-xl font-black section-title mb-6">Education</h2>
-      <div class="bg-white border border-slate-200 rounded-xl p-6 shadow-sm space-y-6">
+      <div class="bg-white/95 backdrop-blur-sm border border-slate-200 rounded-xl p-6 shadow-sm space-y-6">
         
         <div class="border-l-2 border-amber-700 pl-4">
           <div class="flex flex-wrap justify-between items-baseline gap-1">
             <h3 class="font-bold text-sm sm:text-base text-slate-900">Bachelor of Science (B.Sc.) in Materials and Metallurgical Engineering</h3>
-            <span class="text-xs font-semibold text-amber-800 bg-amber-50 px-2.5 py-0.5 rounded-full">2022 – Present[cite: 11]</span>
+            <span class="text-xs font-semibold text-amber-800 bg-amber-50 px-2.5 py-0.5 rounded-full">2022 – Present</span>
           </div>
-          <p class="text-xs sm:text-sm text-slate-600 mt-1">Chittagong University of Engineering and Technology (CUET)[cite: 11]</p>
-          <span class="inline-block text-xs font-bold text-teal-800 bg-teal-50 border border-teal-200 px-2 py-0.5 rounded mt-2">Expected Graduation: 2027[cite: 11]</span>
+          <p class="text-xs sm:text-sm text-slate-600 mt-1">Chittagong University of Engineering and Technology (CUET)</p>
+          <span class="inline-block text-xs font-bold text-teal-800 bg-teal-50 border border-teal-200 px-2 py-0.5 rounded mt-2">Expected Graduation: 2027</span>
         </div>
 
         <div class="border-l-2 border-slate-200 pl-4">
           <div class="flex flex-wrap justify-between items-baseline gap-1">
             <h3 class="font-bold text-sm sm:text-base text-slate-900">Higher Secondary Certificate (HSC)</h3>
-            <span class="text-xs font-semibold text-slate-500">2019 – 2021[cite: 11]</span>
+            <span class="text-xs font-semibold text-slate-500">2019 – 2021</span>
           </div>
-          <p class="text-xs sm:text-sm text-slate-600 mt-1">Chittagong College[cite: 11]</p>
+          <p class="text-xs sm:text-sm text-slate-600 mt-1">Chittagong College</p>
         </div>
 
         <div class="border-l-2 border-slate-200 pl-4">
           <div class="flex flex-wrap justify-between items-baseline gap-1">
             <h3 class="font-bold text-sm sm:text-base text-slate-900">Secondary School Certificate (SSC)</h3>
-            <span class="text-xs font-semibold text-slate-500">2014 – 2019[cite: 11]</span>
+            <span class="text-xs font-semibold text-slate-500">2014 – 2019</span>
           </div>
-          <p class="text-xs sm:text-sm text-slate-600 mt-1">Nasirabad Govt. High School[cite: 11]</p>
+          <p class="text-xs sm:text-sm text-slate-600 mt-1">Nasirabad Govt. High School</p>
         </div>
 
       </div>
@@ -307,7 +364,7 @@ const recentPosts = posts.slice(0, 2);
       <h2 class="text-xl font-black section-title mb-6">Skills & Toolkit</h2>
       <div class="space-y-4">
         
-        <div class="bg-white border border-slate-200 rounded-xl p-5 shadow-sm">
+        <div class="bg-white/95 backdrop-blur-sm border border-slate-200 rounded-xl p-5 shadow-sm">
           <h3 class="text-xs font-extrabold uppercase tracking-wider text-amber-800 mb-3">Technical & Core Engineering Skills</h3>
           <div class="flex flex-wrap gap-2">
             {[
@@ -322,7 +379,7 @@ const recentPosts = posts.slice(0, 2);
           </div>
         </div>
 
-        <div class="bg-white border border-slate-200 rounded-xl p-5 shadow-sm">
+        <div class="bg-white/95 backdrop-blur-sm border border-slate-200 rounded-xl p-5 shadow-sm">
           <h3 class="text-xs font-extrabold uppercase tracking-wider text-amber-800 mb-3">Software & Analytical Tools</h3>
           <div class="flex flex-wrap gap-2">
             {[
@@ -337,7 +394,7 @@ const recentPosts = posts.slice(0, 2);
           </div>
         </div>
 
-        <div class="bg-white border border-slate-200 rounded-xl p-5 shadow-sm">
+        <div class="bg-white/95 backdrop-blur-sm border border-slate-200 rounded-xl p-5 shadow-sm">
           <h3 class="text-xs font-extrabold uppercase tracking-wider text-amber-800 mb-3">Professional, Leadership & Interpersonal Skills</h3>
           <div class="flex flex-wrap gap-2">
             {[
@@ -370,7 +427,7 @@ const recentPosts = posts.slice(0, 2);
         {recentPosts.map((post: any) => {
           const slug = post.file.split('/').pop().replace('.md', '');
           return (
-            <article class="bg-white border border-slate-200 rounded-xl p-5 shadow-sm flex flex-col justify-between hover:border-amber-700/50 transition">
+            <article class="bg-white/95 backdrop-blur-sm border border-slate-200 rounded-xl p-5 shadow-sm flex flex-col justify-between hover:border-amber-700/50 transition">
               <div>
                 <div class="flex items-center gap-2 mb-2">
                   <span class="text-[11px] font-semibold text-amber-800 bg-amber-50 px-2 py-0.5 rounded-full">
@@ -395,16 +452,116 @@ const recentPosts = posts.slice(0, 2);
 
   </main>
 
-  <!-- Dark Footer with Direct Contact Action -->
-  <footer class="border-t border-neutral-800 py-10 bg-neutral-950 text-slate-400">
-    <div class="max-w-4xl mx-auto px-5 flex flex-col sm:flex-row items-center justify-between gap-4">
-      <p class="text-xs">© 2026 Muhammad Raihanul Karim</p>
-      <a 
-        href="mailto:raihanulkarim02@gmail.com" 
-        class="bg-amber-700 hover:bg-amber-600 text-white text-xs px-4 py-2 rounded-lg transition font-bold"
-      >
-        Get in Touch
-      </a>
+  <!-- Dark Footer with Social Profiles & Contact Action -->
+  <footer class="border-t border-neutral-800 py-12 bg-neutral-950 text-slate-400">
+    <div class="max-w-4xl mx-auto px-5 space-y-8">
+      
+      <!-- Top Row: Social Links & Contact -->
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-6 pb-6 border-b border-neutral-800/80">
+        
+        <!-- Social Profiles Section -->
+        <div class="flex flex-col sm:flex-row items-center gap-3">
+          <span class="text-xs font-semibold text-slate-300 uppercase tracking-wider">Connect:</span>
+          
+          <div class="flex items-center gap-3">
+            <!-- LinkedIn -->
+            <a 
+              href="https://www.linkedin.com/in/raihanulkarim02" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              title="LinkedIn"
+              class="group relative inline-block transition-transform hover:-translate-y-1"
+            >
+              <img 
+                src="/images/linkedin.jpg" 
+                alt="LinkedIn" 
+                class="w-9 h-9 rounded-full object-cover border border-neutral-700 group-hover:border-amber-500 transition-colors shadow"
+                onerror="this.src='https://ui-avatars.com/api/?name=IN&background=0077b5&color=fff&rounded=true'"
+              />
+            </a>
+
+            <!-- ResearchGate -->
+            <a 
+              href="https://www.researchgate.net/profile/Raihanul-Karim?ev=hdr_xprf" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              title="ResearchGate"
+              class="group relative inline-block transition-transform hover:-translate-y-1"
+            >
+              <img 
+                src="/images/researchgate.jpg" 
+                alt="ResearchGate" 
+                class="w-9 h-9 rounded-full object-cover border border-neutral-700 group-hover:border-amber-500 transition-colors shadow"
+                onerror="this.src='https://ui-avatars.com/api/?name=RG&background=00ccbb&color=fff&rounded=true'"
+              />
+            </a>
+
+            <!-- Facebook -->
+            <a 
+              href="https://www.facebook.com/profile.php?id=100085123103216" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              title="Facebook"
+              class="group relative inline-block transition-transform hover:-translate-y-1"
+            >
+              <img 
+                src="/images/facebook.jpg" 
+                alt="Facebook" 
+                class="w-9 h-9 rounded-full object-cover border border-neutral-700 group-hover:border-amber-500 transition-colors shadow"
+                onerror="this.src='https://ui-avatars.com/api/?name=FB&background=1877f2&color=fff&rounded=true'"
+              />
+            </a>
+
+            <!-- Instagram -->
+            <a 
+              href="https://www.instagram.com/raihanulkarim02/" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              title="Instagram"
+              class="group relative inline-block transition-transform hover:-translate-y-1"
+            >
+              <img 
+                src="/images/instagram.jpg" 
+                alt="Instagram" 
+                class="w-9 h-9 rounded-full object-cover border border-neutral-700 group-hover:border-amber-500 transition-colors shadow"
+                onerror="this.src='https://ui-avatars.com/api/?name=IG&background=e1306c&color=fff&rounded=true'"
+              />
+            </a>
+
+            <!-- Quora -->
+            <a 
+              href="https://bn.quora.com/profile/Raihanul-Karim-1?ch=10&oid=1234586537&share=7cb23ec8&srid=uDa3hd&target_type=user" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              title="Quora"
+              class="group relative inline-block transition-transform hover:-translate-y-1"
+            >
+              <img 
+                src="/images/quora.jpg" 
+                alt="Quora" 
+                class="w-9 h-9 rounded-full object-cover border border-neutral-700 group-hover:border-amber-500 transition-colors shadow"
+                onerror="this.src='https://ui-avatars.com/api/?name=Q&background=b92b27&color=fff&rounded=true'"
+              />
+            </a>
+          </div>
+        </div>
+
+        <!-- Get in Touch Action -->
+        <a 
+          href="mailto:raihanulkarim02@gmail.com" 
+          class="bg-amber-700 hover:bg-amber-600 text-white text-xs px-4 py-2 rounded-lg transition font-bold"
+        >
+          Get in Touch
+        </a>
+
+      </div>
+
+      <!-- Bottom Row: Copyright -->
+      <div class="flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-2">
+        <p>© 2026 Muhammad Raihanul Karim. All rights reserved.</p>
+        <p>Chittagong, Bangladesh</p>
+      </div>
+
     </div>
   </footer>
 

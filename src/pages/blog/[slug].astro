@@ -18,60 +18,175 @@ const { Content } = post;
 ---
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{post.frontmatter.title} | Raihanul Karim</title>
+  <!-- Google Fonts: Lato & Hind Siliguri (Bengali) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,400&display=swap" rel="stylesheet">
   <style>
-    body { font-family: 'Lato', sans-serif; }
-    .prose h3 { font-size: 1.35rem; font-weight: 800; color: #0f172a; margin-top: 1.75rem; margin-bottom: 0.75rem; }
-    .prose p { margin-bottom: 1.25rem; line-height: 1.75; color: #334155; }
-    .prose ul { list-style-type: disc; margin-left: 1.25rem; margin-bottom: 1.25rem; color: #334155; }
-    .prose li { margin-bottom: 0.5rem; }
+    body { 
+      font-family: 'Lato', 'Hind Siliguri', 'SolaimanLipi', system-ui, sans-serif; 
+    }
+    .bg-grid-dots {
+      background-color: #f8fafc;
+      background-image: radial-gradient(rgba(100, 116, 139, 0.16) 1.2px, transparent 1.2px);
+      background-size: 24px 24px;
+    }
+    .article-body h3 {
+      font-size: 1.45rem;
+      font-weight: 700;
+      color: #0f172a;
+      margin-top: 2.25rem;
+      margin-bottom: 0.85rem;
+    }
+    .article-body p {
+      font-size: 1.05rem;
+      line-height: 1.85;
+      color: #334155;
+      margin-bottom: 1.35rem;
+    }
+    .article-body hr {
+      margin: 2rem 0;
+      border-color: #e2e8f0;
+    }
+    .article-body strong {
+      color: #0f172a;
+      font-weight: 700;
+    }
   </style>
 </head>
-<body class="bg-slate-50 text-slate-900 antialiased selection:bg-amber-800 selection:text-white">
+<body class="bg-grid-dots text-slate-900 antialiased selection:bg-amber-800 selection:text-white min-h-screen flex flex-col justify-between">
 
-  <!-- Header -->
-  <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200">
+  <!-- Dark Top Navigation -->
+  <header class="sticky top-0 z-50 bg-neutral-950/95 backdrop-blur-md border-b border-neutral-800 text-white">
     <div class="max-w-4xl mx-auto px-5 h-16 flex items-center justify-between">
-      <a href="/" class="font-black text-base tracking-tight text-slate-900">RAIHANUL KARIM</a>
-      <nav class="flex items-center gap-5 text-sm font-semibold text-slate-600">
-        <a href="/" class="hover:text-amber-800 transition">Portfolio</a>
-        <a href="/blog" class="text-amber-800 font-bold transition">Blog</a>
+      
+      <!-- Fixed Logo -->
+      <a href="/" class="flex items-center">
+        <img 
+          src="/images/logo.png" 
+          alt="@raihan_26" 
+          class="h-7 sm:h-8 w-auto object-contain" 
+        />
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav class="hidden md:flex items-center gap-6 text-sm font-semibold text-slate-300">
+        <a href="/" class="hover:text-amber-400 transition">Portfolio</a>
+        <a href="/blog" class="text-amber-400 font-bold hover:text-amber-300 transition">Blog</a>
+        <a href="mailto:raihanulkarim02@gmail.com" class="bg-amber-700 hover:bg-amber-600 text-white text-xs px-3.5 py-2 rounded-lg transition font-bold">Contact</a>
       </nav>
+
+      <!-- Mobile Hamburger Button -->
+      <button 
+        id="mobile-menu-btn" 
+        type="button" 
+        aria-label="Toggle Navigation Menu"
+        class="md:hidden p-2 text-slate-300 hover:text-white focus:outline-none"
+      >
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+
+    </div>
+
+    <!-- Mobile Dropdown Menu -->
+    <div id="mobile-menu" class="hidden md:hidden bg-neutral-900 border-b border-neutral-800 px-5 py-4 space-y-3">
+      <a href="/" class="block text-sm font-semibold text-slate-200 hover:text-amber-400 transition py-1">Portfolio</a>
+      <a href="/blog" class="block text-sm font-bold text-amber-400 hover:text-amber-300 transition py-1">Blog</a>
+      <a href="mailto:raihanulkarim02@gmail.com" class="inline-block mt-2 bg-amber-700 hover:bg-amber-600 text-white text-xs px-4 py-2 rounded-lg transition font-bold">Contact</a>
     </div>
   </header>
 
-  <!-- Post Body -->
-  <article class="max-w-3xl mx-auto px-5 py-16">
-    <a href="/blog" class="text-xs font-bold text-amber-800 hover:text-amber-900 inline-flex items-center gap-1 mb-6">
+  <!-- Article View -->
+  <main class="max-w-3xl mx-auto px-5 py-14 w-full flex-1">
+    
+    <a href="/blog" class="text-xs sm:text-sm font-bold text-amber-800 hover:text-amber-900 inline-flex items-center gap-1.5 mb-8 transition">
       &larr; Back to all articles
     </a>
-    
-    <header class="mb-10 pb-6 border-b border-slate-200">
-      <h1 class="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight leading-tight mb-4">
-        {post.frontmatter.title}
-      </h1>
-      <div class="flex flex-wrap items-center gap-3 text-xs text-slate-500">
-        <span>Published on {post.frontmatter.pubDate}</span>
-        <span>•</span>
-        <span>Muhammad Raihanul Karim</span>
+
+    <article class="bg-white/95 backdrop-blur-sm border border-slate-200 rounded-2xl p-6 sm:p-10 shadow-sm">
+      <header class="mb-8 pb-6 border-b border-slate-200">
+        <div class="flex flex-wrap items-center gap-2 mb-3">
+          <span class="text-xs font-semibold text-amber-800 bg-amber-50 px-2.5 py-0.5 rounded-full">
+            {post.frontmatter.pubDate}
+          </span>
+          {post.frontmatter.tags && post.frontmatter.tags.map((tag: string) => (
+            <span class="text-xs font-medium text-slate-500 bg-slate-100 px-2.5 py-0.5 rounded-full">
+              #{tag}
+            </span>
+          ))}
+        </div>
+
+        <h1 class="text-2xl sm:text-4xl font-black text-slate-900 tracking-tight leading-tight mb-3">
+          {post.frontmatter.title}
+        </h1>
+        <p class="text-xs text-slate-500">
+          Written by Muhammad Raihanul Karim
+        </p>
+      </header>
+
+      <div class="article-body">
+        <Content />
       </div>
-    </header>
+    </article>
 
-    <div class="prose max-w-none text-base">
-      <Content />
+  </main>
+
+  <!-- Dark Footer -->
+  <footer class="border-t border-neutral-800 py-12 bg-neutral-950 text-slate-400 mt-16">
+    <div class="max-w-4xl mx-auto px-5 space-y-8">
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-6 pb-6 border-b border-neutral-800/80">
+        <div class="flex flex-col sm:flex-row items-center gap-3">
+          <span class="text-xs font-semibold text-slate-300 uppercase tracking-wider">Connect:</span>
+          <div class="flex items-center gap-3">
+            <a href="https://www.linkedin.com/in/raihanulkarim02" target="_blank" rel="noopener noreferrer" title="LinkedIn" class="transition-transform hover:-translate-y-1">
+              <img src="/images/linkedin.jpg" alt="LinkedIn" class="w-9 h-9 rounded-full object-cover border border-neutral-700 hover:border-amber-500 transition-colors shadow" onerror="this.src='https://ui-avatars.com/api/?name=IN&background=0077b5&color=fff&rounded=true'" />
+            </a>
+            <a href="https://www.researchgate.net/profile/Raihanul-Karim?ev=hdr_xprf" target="_blank" rel="noopener noreferrer" title="ResearchGate" class="transition-transform hover:-translate-y-1">
+              <img src="/images/researchgate.jpg" alt="ResearchGate" class="w-9 h-9 rounded-full object-cover border border-neutral-700 hover:border-amber-500 transition-colors shadow" onerror="this.src='https://ui-avatars.com/api/?name=RG&background=00ccbb&color=fff&rounded=true'" />
+            </a>
+            <a href="https://www.facebook.com/profile.php?id=100085123103216" target="_blank" rel="noopener noreferrer" title="Facebook" class="transition-transform hover:-translate-y-1">
+              <img src="/images/facebook.jpg" alt="Facebook" class="w-9 h-9 rounded-full object-cover border border-neutral-700 hover:border-amber-500 transition-colors shadow" onerror="this.src='https://ui-avatars.com/api/?name=FB&background=1877f2&color=fff&rounded=true'" />
+            </a>
+            <a href="https://www.instagram.com/raihanulkarim02/" target="_blank" rel="noopener noreferrer" title="Instagram" class="transition-transform hover:-translate-y-1">
+              <img src="/images/instagram.jpg" alt="Instagram" class="w-9 h-9 rounded-full object-cover border border-neutral-700 hover:border-amber-500 transition-colors shadow" onerror="this.src='https://ui-avatars.com/api/?name=IG&background=e1306c&color=fff&rounded=true'" />
+            </a>
+            <a href="https://bn.quora.com/profile/Raihanul-Karim-1?ch=10&oid=1234586537&share=7cb23ec8&srid=uDa3hd&target_type=user" target="_blank" rel="noopener noreferrer" title="Quora" class="transition-transform hover:-translate-y-1">
+              <img src="/images/quora.jpg" alt="Quora" class="w-9 h-9 rounded-full object-cover border border-neutral-700 hover:border-amber-500 transition-colors shadow" onerror="this.src='https://ui-avatars.com/api/?name=Q&background=b92b27&color=fff&rounded=true'" />
+            </a>
+          </div>
+        </div>
+
+        <a 
+          href="mailto:raihanulkarim02@gmail.com" 
+          class="bg-amber-700 hover:bg-amber-600 text-white text-xs px-4 py-2 rounded-lg transition font-bold"
+        >
+          Get in Touch
+        </a>
+      </div>
+
+      <div class="flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-2">
+        <p>© 2026 Muhammad Raihanul Karim. All rights reserved.</p>
+        <p>Chittagong, Bangladesh</p>
+      </div>
     </div>
-  </article>
-
-  <footer class="border-t border-slate-200 py-8 bg-white text-center text-xs text-slate-500">
-    <p>© 2026 Muhammad Raihanul Karim</p>
   </footer>
+
+  <!-- Script for Mobile Menu -->
+  <script>
+    const menuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    menuBtn?.addEventListener('click', () => {
+      mobileMenu?.classList.toggle('hidden');
+    });
+  </script>
 
 </body>
 </html>
