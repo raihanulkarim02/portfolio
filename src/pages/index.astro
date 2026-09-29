@@ -7,6 +7,17 @@ const posts = Object.values(import.meta.glob('../content/blog/*.md', { eager: tr
 posts.sort((a: any, b: any) => new Date(b.frontmatter.pubDate).getTime() - new Date(a.frontmatter.pubDate).getTime());
 const recentPosts = posts.slice(0, 2);
 
+// Moments Slider dataset (7 through 13)
+const momentsSlider = [
+  { src: "/images/moments/moment-7.jpg", alt: "Candid corridor team selfie" },
+  { src: "/images/moments/moment-8.jpg", alt: "TEDx CUET team execution" },
+  { src: "/images/moments/moments-9.jpg", alt: "Event moment 9" },
+  { src: "/images/moments/moments-10.jpg", alt: "Event moment 10" },
+  { src: "/images/moments/moments-11.jpg", alt: "Event moment 11" },
+  { src: "/images/moments/moments-12.jpg", alt: "Event moment 12" },
+  { src: "/images/moments/moments-13.jpg", alt: "Event moment 13" },
+];
+
 // Certifications dataset
 const certifications = [
   {
@@ -77,7 +88,7 @@ const certifications = [
       background-image: radial-gradient(rgba(100, 116, 139, 0.16) 1.2px, transparent 1.2px);
       background-size: 24px 24px;
     }
-    /* Hide scrollbars for the slider track */
+    /* Hide scrollbars for sliders */
     .no-scrollbar::-webkit-scrollbar {
       display: none;
     }
@@ -89,7 +100,7 @@ const certifications = [
     /* Scroll Pop-In Animation for Moments Collage */
     .moment-item {
       opacity: 0;
-      transform: translateY(28px) scale(0.97);
+      transform: translateY(24px) scale(0.98);
       transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
       will-change: opacity, transform;
     }
@@ -397,14 +408,14 @@ const certifications = [
       </div>
     </section>
 
-    <!-- Moments in Action: 2-Column Mobile Collage & 12-Column Desktop Grid -->
-    <section id="moments" class="space-y-6">
+    <!-- Moments in Action: 6-Photo Collage + Horizontal Slider -->
+    <section id="moments" class="space-y-10">
       <div>
         <h2 class="text-xl font-black section-title">Moments in Action</h2>
         <p class="text-xs text-slate-500 mt-0.5">Summits, stage coordination, caucus sessions, and team operations on the ground</p>
       </div>
 
-      <!-- 2-column grid on mobile, 12-column on desktop -->
+      <!-- 1. The 6-Image Asymmetrical Collage (Moments 1 to 6) -->
       <div class="grid grid-cols-2 md:grid-cols-12 gap-2.5 sm:gap-3.5 md:gap-4 items-stretch">
         
         <!-- Row 1: Image 1 (Panel Discussion) -->
@@ -427,7 +438,7 @@ const certifications = [
           />
         </div>
 
-        <!-- Row 2: Image 3 (Auditorium Huddle - Slightly Taller) -->
+        <!-- Row 2: Image 3 (Auditorium Huddle) -->
         <div class="moment-item col-span-1 md:col-span-4 overflow-hidden rounded-xl bg-slate-200 border border-slate-200/80 shadow-xs group">
           <img 
             src="/images/moments/moment-3.jpg" 
@@ -437,7 +448,7 @@ const certifications = [
           />
         </div>
 
-        <!-- Row 2: Image 4 (Podium Address - Slightly Taller) -->
+        <!-- Row 2: Image 4 (Podium Address) -->
         <div class="moment-item col-span-1 md:col-span-5 overflow-hidden rounded-xl bg-slate-200 border border-slate-200/80 shadow-xs group">
           <img 
             src="/images/moments/moment-4.jpg" 
@@ -447,7 +458,7 @@ const certifications = [
           />
         </div>
 
-        <!-- Row 3 on Mobile (Side-by-side) / Column 3 on Desktop (Stacked) -->
+        <!-- Row 2: Stacked Images 5 & 6 -->
         <div class="col-span-2 md:col-span-3 grid grid-cols-2 md:flex md:flex-col gap-2.5 sm:gap-3.5 md:gap-4">
           <!-- Image 5: Laptop Focus -->
           <div class="moment-item flex-1 overflow-hidden rounded-xl bg-slate-200 border border-slate-200/80 shadow-xs group">
@@ -469,27 +480,56 @@ const certifications = [
           </div>
         </div>
 
-        <!-- Row 4: Image 7 (Corridor Team Selfie) -->
-        <div class="moment-item col-span-1 md:col-span-6 overflow-hidden rounded-xl bg-slate-200 border border-slate-200/80 shadow-xs group">
-          <img 
-            src="/images/moments/moment-7.jpg" 
-            alt="Candid team selfie" 
-            class="w-full h-40 sm:h-60 md:h-72 object-cover object-center group-hover:scale-105 transition-transform duration-500" 
-            loading="lazy" 
-          />
-        </div>
-
-        <!-- Row 4: Image 8 (TEDx Team Letter Boards) -->
-        <div class="moment-item col-span-1 md:col-span-6 overflow-hidden rounded-xl bg-slate-200 border border-slate-200/80 shadow-xs group">
-          <img 
-            src="/images/moments/moment-8.jpg" 
-            alt="TEDx team execution" 
-            class="w-full h-40 sm:h-60 md:h-72 object-cover object-center group-hover:scale-105 transition-transform duration-500" 
-            loading="lazy" 
-          />
-        </div>
-
       </div>
+
+      <!-- 2. The Horizontal Slider for Additional Moments (Images 7 to 13) -->
+      <div class="pt-4 border-t border-slate-200/80">
+        <div class="flex items-center justify-between mb-4">
+          <span class="text-xs font-bold uppercase tracking-wider text-amber-800 flex items-center gap-1.5">
+            <span class="w-2 h-2 rounded-full bg-amber-600 animate-pulse"></span>
+            More Field Snapshots & Team Highlights
+          </span>
+
+          <!-- Slider Controls -->
+          <div class="flex items-center gap-2">
+            <button 
+              id="moments-prev" 
+              type="button" 
+              aria-label="Previous Moment" 
+              class="w-8 h-8 rounded-lg bg-white border border-slate-300 hover:border-amber-700 hover:text-amber-800 text-slate-600 flex items-center justify-center transition shadow-xs focus:outline-none"
+            >
+              &#8592;
+            </button>
+            <button 
+              id="moments-next" 
+              type="button" 
+              aria-label="Next Moment" 
+              class="w-8 h-8 rounded-lg bg-white border border-slate-300 hover:border-amber-700 hover:text-amber-800 text-slate-600 flex items-center justify-center transition shadow-xs focus:outline-none"
+            >
+              &#8594;
+            </button>
+          </div>
+        </div>
+
+        <!-- Slider Track -->
+        <div 
+          id="moments-track" 
+          class="flex gap-3 sm:gap-4 overflow-x-auto no-scrollbar scroll-smooth snap-x snap-mandatory py-1 -mx-2 px-2"
+        >
+          {momentsSlider.map(moment => (
+            <div class="min-w-[220px] sm:min-w-[270px] md:min-w-[310px] max-w-[310px] h-44 sm:h-52 md:h-56 bg-slate-200 rounded-xl overflow-hidden snap-start shadow-xs border border-slate-200/90 group flex-shrink-0 relative">
+              <img 
+                src={moment.src} 
+                alt={moment.alt} 
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
+                loading="lazy"
+                onerror="if (this.src.includes('moments-')) { this.src = this.src.replace('moments-', 'moment-'); } else if (this.src.includes('moment-')) { this.src = this.src.replace('moment-', 'moments-'); }"
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+
     </section>
 
     <!-- Certifications & Training: Interactive Certificate Card Slider -->
@@ -500,7 +540,6 @@ const certifications = [
           <p class="text-xs text-slate-500 mt-0.5">Continuous learning across management, process engineering, and digital tools</p>
         </div>
 
-        <!-- Slider Controls -->
         <div class="flex items-center gap-2">
           <button 
             id="cert-prev" 
@@ -521,7 +560,6 @@ const certifications = [
         </div>
       </div>
 
-      <!-- Slider Track -->
       <div 
         id="certs-track" 
         class="flex gap-4 overflow-x-auto no-scrollbar scroll-smooth snap-x snap-mandatory py-2 -mx-2 px-2"
@@ -701,7 +739,6 @@ const certifications = [
       <!-- Top Row: Social Links & Contact -->
       <div class="flex flex-col sm:flex-row items-center justify-between gap-6 pb-6 border-b border-neutral-800/80">
         
-        <!-- Social Profiles Section -->
         <div class="flex flex-col sm:flex-row items-center gap-3">
           <span class="text-xs font-semibold text-slate-300 uppercase tracking-wider">Connect:</span>
           
@@ -783,7 +820,6 @@ const certifications = [
           </div>
         </div>
 
-        <!-- Get in Touch Action -->
         <a 
           href="mailto:raihanulkarim02@gmail.com" 
           class="bg-amber-700 hover:bg-amber-600 text-white text-xs px-4 py-2 rounded-lg transition font-bold"
@@ -793,7 +829,6 @@ const certifications = [
 
       </div>
 
-      <!-- Bottom Row: Copyright -->
       <div class="flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-2">
         <p>© 2026 Muhammad Raihanul Karim. All rights reserved.</p>
         <p>Chittagong, Bangladesh</p>
@@ -802,7 +837,7 @@ const certifications = [
     </div>
   </footer>
 
-  <!-- Scripts: Mobile Menu, Read More Toggles, Slider & Scroll Pop-In Observer -->
+  <!-- Scripts: Menus, Toggles, Both Sliders, and Scroll Reveal -->
   <script>
     // 1. Mobile Menu Toggle
     const menuBtn = document.getElementById('mobile-menu-btn');
@@ -831,20 +866,21 @@ const certifications = [
       });
     });
 
-    // 3. Fast Auto-Sliding Certificate Track
-    const track = document.getElementById('certs-track');
-    const prevBtn = document.getElementById('cert-prev');
-    const nextBtn = document.getElementById('cert-next');
+    // 3. Helper function for Horizontal Auto-Sliders
+    function setupSlider(trackId: string, prevId: string, nextId: string, step: number, intervalMs: number) {
+      const track = document.getElementById(trackId);
+      const prevBtn = document.getElementById(prevId);
+      const nextBtn = document.getElementById(nextId);
 
-    if (track) {
-      const scrollStep = 336;
-      let autoSlideTimer: any = null;
+      if (!track) return;
+
+      let timer: any = null;
 
       const slideNext = () => {
         if (track.scrollLeft + track.clientWidth >= track.scrollWidth - 10) {
           track.scrollTo({ left: 0, behavior: 'smooth' });
         } else {
-          track.scrollBy({ left: scrollStep, behavior: 'smooth' });
+          track.scrollBy({ left: step, behavior: 'smooth' });
         }
       };
 
@@ -852,38 +888,37 @@ const certifications = [
         if (track.scrollLeft <= 10) {
           track.scrollTo({ left: track.scrollWidth, behavior: 'smooth' });
         } else {
-          track.scrollBy({ left: -scrollStep, behavior: 'smooth' });
+          track.scrollBy({ left: -step, behavior: 'smooth' });
         }
       };
 
-      const startTimer = () => {
-        stopTimer();
-        autoSlideTimer = setInterval(slideNext, 2400);
+      const start = () => {
+        stop();
+        timer = setInterval(slideNext, intervalMs);
       };
 
-      const stopTimer = () => {
-        if (autoSlideTimer) clearInterval(autoSlideTimer);
+      const stop = () => {
+        if (timer) clearInterval(timer);
       };
 
-      nextBtn?.addEventListener('click', () => {
-        slideNext();
-        startTimer();
-      });
+      nextBtn?.addEventListener('click', () => { slideNext(); start(); });
+      prevBtn?.addEventListener('click', () => { slidePrev(); start(); });
 
-      prevBtn?.addEventListener('click', () => {
-        slidePrev();
-        startTimer();
-      });
+      track.addEventListener('mouseenter', stop);
+      track.addEventListener('mouseleave', start);
+      track.addEventListener('touchstart', stop, { passive: true });
+      track.addEventListener('touchend', start, { passive: true });
 
-      track.addEventListener('mouseenter', stopTimer);
-      track.addEventListener('mouseleave', startTimer);
-      track.addEventListener('touchstart', stopTimer, { passive: true });
-      track.addEventListener('touchend', startTimer, { passive: true });
-
-      startTimer();
+      start();
     }
 
-    // 4. Staggered Scroll-Triggered Reveal for Moments in Action
+    // Initialize Moments Slider (Cards ~320px)
+    setupSlider('moments-track', 'moments-prev', 'moments-next', 320, 2600);
+
+    // Initialize Certifications Slider (Cards ~336px)
+    setupSlider('certs-track', 'cert-prev', 'cert-next', 336, 2400);
+
+    // 4. Staggered Scroll-Triggered Reveal for Moments Collage
     const momentCards = document.querySelectorAll('.moment-item');
     if (momentCards.length > 0) {
       const observer = new IntersectionObserver((entries) => {
@@ -891,10 +926,9 @@ const certifications = [
           if (entry.isIntersecting) {
             const el = entry.target;
             const index = Array.from(momentCards).indexOf(el);
-            // Stagger each image slightly as it scrolls into viewport
             setTimeout(() => {
               el.classList.add('is-revealed');
-            }, (index % 4) * 110);
+            }, (index % 4) * 100);
             observer.unobserve(el);
           }
         });
