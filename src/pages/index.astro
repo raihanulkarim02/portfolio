@@ -6,6 +6,52 @@ import '../styles/global.css';
 const posts = Object.values(import.meta.glob('../content/blog/*.md', { eager: true }));
 posts.sort((a: any, b: any) => new Date(b.frontmatter.pubDate).getTime() - new Date(a.frontmatter.pubDate).getTime());
 const recentPosts = posts.slice(0, 2);
+
+// Certifications dataset
+const certifications = [
+  {
+    title: "Lean Six Sigma White Belt Certification",
+    issuer: "Management & Strategy Institute",
+    date: "Mar 2025",
+    link: "https://drive.google.com/file/d/1v7t6R2jYoZwxv2QhYToZkJUEObbAklxU/view",
+    badge: "Process Improvement"
+  },
+  {
+    title: "Diploma in Project Management",
+    issuer: "Alison",
+    date: "Aug 2023",
+    link: "https://alison.com/certification/check/$2y$10$l9OOdMHktsk8SPMwNI8aL.gtFGO10OYJfor7NGOtqwgmo49YQIOO",
+    badge: "Project Management"
+  },
+  {
+    title: "Full Stack Digital Marketing",
+    issuer: "Bohubrihi",
+    date: "Mar 2024",
+    link: "https://drive.google.com/file/d/1gW3bkbz-vBgDzZNdcT37NVgl8T9ej12N/view",
+    badge: "Marketing Strategy"
+  },
+  {
+    title: "Microsoft Excel for Professionals",
+    issuer: "BYLCx",
+    date: "Dec 2022",
+    link: "https://drive.google.com/file/d/19ntRVabn8ua0E1RlLhJt0p1yheK-gRh9/view",
+    badge: "Data & Analytics"
+  },
+  {
+    title: "Effective Leadership",
+    issuer: "HP LIFE",
+    date: "Dec 2022",
+    link: "https://drive.google.com/file/d/1wjXCVX0Z9k_hSdk7UcKeH4u7VAFaWNu8/view",
+    badge: "Leadership"
+  },
+  {
+    title: "Google Workspace Essential Training",
+    issuer: "Bohubrihi",
+    date: "Oct 2021",
+    link: "https://drive.google.com/file/d/1SoFhVcN__0P08pcYv7cRnav934oV2Bhu/view",
+    badge: "Productivity Tools"
+  }
+];
 ---
 
 <!DOCTYPE html>
@@ -25,11 +71,31 @@ const recentPosts = posts.slice(0, 2);
     .section-title { 
       color: #d2691e; /* Chocolate heading */
     }
-    /* Subtle, low-contrast engineering dot pattern */
+    /* Subtle dot grid pattern */
     .bg-grid-dots {
       background-color: #f8fafc;
       background-image: radial-gradient(rgba(100, 116, 139, 0.16) 1.2px, transparent 1.2px);
       background-size: 24px 24px;
+    }
+    /* Hide scrollbars for the slider track */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    /* Scroll Pop-In Animation for Moments Collage */
+    .moment-item {
+      opacity: 0;
+      transform: translateY(28px) scale(0.97);
+      transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform;
+    }
+    .moment-item.is-revealed {
+      opacity: 1;
+      transform: translateY(0) scale(1);
     }
   </style>
 </head>
@@ -49,10 +115,11 @@ const recentPosts = posts.slice(0, 2);
       </a>
 
       <!-- Desktop Navigation Menu -->
-      <nav class="hidden md:flex items-center gap-6 text-sm font-semibold text-slate-300">
+      <nav class="hidden md:flex items-center gap-5 lg:gap-6 text-[13px] lg:text-sm font-semibold text-slate-300">
         <a href="#about" class="hover:text-amber-400 transition">About</a>
         <a href="#experience" class="hover:text-amber-400 transition">Experience</a>
-        <a href="#leadership" class="hover:text-amber-400 transition">Leadership</a>
+        <a href="#moments" class="hover:text-amber-400 transition">Moments</a>
+        <a href="#certifications" class="hover:text-amber-400 transition">Certifications</a>
         <a href="#education" class="hover:text-amber-400 transition">Education</a>
         <a href="#skills" class="hover:text-amber-400 transition">Skills</a>
         <a href="/blog" class="text-amber-400 font-bold hover:text-amber-300 transition">Blog</a>
@@ -77,7 +144,8 @@ const recentPosts = posts.slice(0, 2);
     <div id="mobile-menu" class="hidden md:hidden bg-neutral-900 border-b border-neutral-800 px-5 py-4 space-y-3">
       <a href="#about" class="block text-sm font-semibold text-slate-200 hover:text-amber-400 transition py-1">About</a>
       <a href="#experience" class="block text-sm font-semibold text-slate-200 hover:text-amber-400 transition py-1">Experience</a>
-      <a href="#leadership" class="block text-sm font-semibold text-slate-200 hover:text-amber-400 transition py-1">Leadership</a>
+      <a href="#moments" class="block text-sm font-semibold text-slate-200 hover:text-amber-400 transition py-1">Moments</a>
+      <a href="#certifications" class="block text-sm font-semibold text-slate-200 hover:text-amber-400 transition py-1">Certifications</a>
       <a href="#education" class="block text-sm font-semibold text-slate-200 hover:text-amber-400 transition py-1">Education</a>
       <a href="#skills" class="block text-sm font-semibold text-slate-200 hover:text-amber-400 transition py-1">Skills</a>
       <a href="/blog" class="block text-sm font-bold text-amber-400 hover:text-amber-300 transition py-1">Blog</a>
@@ -85,44 +153,38 @@ const recentPosts = posts.slice(0, 2);
     </div>
   </header>
 
-  <!-- Hero Section: Full Screen Height on Mobile & Desktop -->
+  <!-- Hero Section -->
   <section 
     class="relative bg-slate-900 text-white min-h-[calc(100svh-4rem)] flex flex-col justify-center px-5 py-12 bg-cover bg-center"
     style="background-image: linear-gradient(180deg, rgba(15, 23, 42, 0.40) 0%, rgba(15, 23, 42, 0.68) 100%), url('/images/hero-bg.jpg');"
   >
     <div class="max-w-4xl mx-auto w-full">
-      
-      <!-- Tag Above Name -->
       <div class="inline-flex items-center gap-2 bg-black/40 border border-white/20 px-3.5 py-1.5 rounded-full text-xs font-semibold text-amber-300 mb-6 backdrop-blur-md">
         <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
         Materials Engineering Undergrad and Project Lead
       </div>
 
-      <!-- Large Bold Name Display -->
       <h1 class="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight leading-none mb-8 text-white drop-shadow-md">
         Muhammad<br class="hidden sm:inline" /> Raihanul Karim
       </h1>
 
-      <!-- Action Buttons -->
       <div class="flex flex-wrap gap-3">
         <a href="#about" class="bg-amber-700 hover:bg-amber-600 text-white text-sm font-bold px-5 py-2.5 rounded-lg transition shadow-md">About Me &darr;</a>
         <a href="/blog" class="bg-black/40 hover:bg-black/60 text-white border border-white/30 text-sm font-bold px-5 py-2.5 rounded-lg transition backdrop-blur-md">Read Blog Posts &rarr;</a>
       </div>
-
     </div>
   </section>
 
   <!-- Main Content Container -->
-  <main class="max-w-4xl mx-auto px-5 py-16 space-y-16">
+  <main class="max-w-4xl mx-auto px-5 py-16 space-y-20">
 
-    <!-- About Section: Styled with Large Portrait & Chocolate Wave Shape -->
+    <!-- About Section -->
     <section id="about">
       <h2 class="text-xl font-black section-title mb-6">About Me</h2>
 
       <div class="bg-white/95 backdrop-blur-sm border border-slate-200 rounded-2xl shadow-sm overflow-hidden">
         <div class="grid grid-cols-1 md:grid-cols-12 items-end">
           
-          <!-- Left Column: Biography Text -->
           <div class="p-6 sm:p-10 md:col-span-7 space-y-4 text-[14px] sm:text-[15px] text-slate-700 leading-relaxed">
             <p>
               Hello! I'm Raihanul Karim, an aspiring engineering student at Chittagong University of Engineering and Technology (CUET). I define myself as a restless, curious and a bit perfectionist. And this tends me to dive deep into complex problems, dissecting them until I find elegant solutions. I love to travel, read books, and explore diverse fields to gather new experiences, truly finding the meaning of life through these activities.
@@ -135,9 +197,7 @@ const recentPosts = posts.slice(0, 2);
             </p>
           </div>
 
-          <!-- Right Column: Transparent Cutout with Organic Wave Backdrop -->
           <div class="relative w-full md:col-span-5 flex items-end justify-center self-end overflow-hidden pt-6 md:pt-0">
-            <!-- Organic Chocolate Curved Shape -->
             <svg 
               class="absolute bottom-0 right-0 w-[115%] h-[80%] text-[#6f4236] z-0 pointer-events-none" 
               viewBox="0 0 320 320" 
@@ -147,7 +207,6 @@ const recentPosts = posts.slice(0, 2);
               <path d="M0,200 C50,200 80,165 140,135 C200,105 250,85 290,105 C310,115 320,135 320,165 L320,320 L0,320 Z" />
             </svg>
 
-            <!-- Cutout Profile Photo -->
             <img 
               src="/images/profile.png" 
               alt="Muhammad Raihanul Karim" 
@@ -160,173 +219,356 @@ const recentPosts = posts.slice(0, 2);
       </div>
     </section>
 
-    <!-- 1. Professional and Industrial -->
-    <section id="experience">
-      <h2 class="text-xl font-black section-title mb-6">Professional and Industrial</h2>
+    <!-- Experience: Umbrella Container with Two Designated Tracks -->
+    <section id="experience" class="space-y-12">
+      <div class="border-b border-slate-200 pb-4">
+        <h2 class="text-2xl font-black section-title tracking-tight">Experience</h2>
+        <p class="text-xs sm:text-sm text-slate-500 mt-1">
+          Industry project operations and campus leadership initiatives.
+        </p>
+      </div>
 
-      <div class="bg-white/95 backdrop-blur-sm border border-slate-200 rounded-xl p-6 shadow-sm">
-        <div class="flex items-start gap-4">
-          <img 
-            src="/images/green-lead.png" 
-            alt="Green Lead" 
-            class="w-11 h-11 rounded-lg object-cover bg-slate-900 flex-shrink-0 border border-slate-200"
-            onerror="this.src='https://ui-avatars.com/api/?name=GL&background=0b132b&color=10b981&bold=true'"
-          />
-          <div class="flex-1 min-w-0">
-            <div class="flex flex-wrap justify-between items-baseline gap-1">
-              <h3 class="font-bold text-base text-slate-900">Green Lead</h3>
-              <span class="text-xs font-semibold text-slate-500">Aug 2024 – Present</span>
-            </div>
+      <!-- Track 1: Professional & Industrial -->
+      <div class="space-y-4">
+        <h3 class="text-sm font-bold uppercase tracking-wider text-slate-700 flex items-center gap-2">
+          <span class="w-2.5 h-2.5 rounded-full bg-amber-700"></span>
+          Professional & Industrial
+        </h3>
 
-            <!-- Role 1: Project Assistant -->
-            <div class="mt-4 border-l-2 border-amber-700 pl-3.5 space-y-1">
-              <h4 class="font-bold text-sm text-slate-800">Project Assistant</h4>
-              <p class="text-xs font-semibold text-amber-700">Mar 2025 – Present · Full-time</p>
-              
-              <!-- First 2 Visible Bullets -->
-              <ul class="text-xs sm:text-sm text-slate-600 space-y-1.5 list-disc ml-4 pt-1 leading-relaxed">
-                <li>Spearheaded and supported planning, coordination, and execution of multiple projects, ensuring on-time delivery and quality outcomes across initiatives.</li>
-                <li>Organized and successfully executed 3+ national summits, training programs, and forums from scratch, collaborating with government and non-government stakeholders for end-to-end implementation.</li>
-              </ul>
+        <div class="bg-white/95 backdrop-blur-sm border border-slate-200 rounded-xl p-6 shadow-sm">
+          <div class="flex items-start gap-4">
+            <img 
+              src="/images/green-lead.png" 
+              alt="Green Lead" 
+              class="w-11 h-11 rounded-lg object-cover bg-slate-900 flex-shrink-0 border border-slate-200"
+              onerror="this.src='https://ui-avatars.com/api/?name=GL&background=0b132b&color=10b981&bold=true'"
+            />
+            <div class="flex-1 min-w-0">
+              <div class="flex flex-wrap justify-between items-baseline gap-1">
+                <h4 class="font-bold text-base text-slate-900">Green Lead</h4>
+                <span class="text-xs font-semibold text-slate-500">Aug 2024 – Present</span>
+              </div>
 
-              <!-- Collapsed Content Container -->
-              <div class="expandable-content hidden">
-                <ul class="text-xs sm:text-sm text-slate-600 space-y-1.5 list-disc ml-4 pt-1.5 leading-relaxed">
-                  <li>Led and managed 5+ online and offline workshops and courses, and initiated 3+ competitions and community engagement activities focused on renewable energy, health & safety, and sustainability.</li>
-                  <li>Contributed to Bangladesh's first One Stop Centre For National Renewable Energy Information, "Re-energize Bangladesh," supporting initiative development and operational coordination.</li>
-                  <li>Developed creative content and strategic communication approaches, improving organic reach and audience engagement across platforms.</li>
-                  <li>Collaborated with cross-functional teams and stakeholders, ensuring smooth workflow, alignment of objectives, and effective communication across projects.</li>
+              <!-- Role 1: Project Assistant -->
+              <div class="mt-4 border-l-2 border-amber-700 pl-3.5 space-y-1">
+                <h5 class="font-bold text-sm text-slate-800">Project Assistant</h5>
+                <p class="text-xs font-semibold text-amber-700">Mar 2025 – Present · Full-time</p>
+                
+                <ul class="text-xs sm:text-sm text-slate-600 space-y-1.5 list-disc ml-4 pt-1 leading-relaxed">
+                  <li>Spearheaded and supported planning, coordination, and execution of multiple projects, ensuring on-time delivery and quality outcomes across initiatives.</li>
+                  <li>Organized and successfully executed 3+ national summits, training programs, and forums from scratch, collaborating with government and non-government stakeholders for end-to-end implementation.</li>
+                </ul>
+
+                <div class="expandable-content hidden">
+                  <ul class="text-xs sm:text-sm text-slate-600 space-y-1.5 list-disc ml-4 pt-1.5 leading-relaxed">
+                    <li>Led and managed 5+ online and offline workshops and courses, and initiated 3+ competitions and community engagement activities focused on renewable energy, health & safety, and sustainability.</li>
+                    <li>Contributed to Bangladesh's first One Stop Centre For National Renewable Energy Information, "Re-energize Bangladesh," supporting initiative development and operational coordination.</li>
+                    <li>Developed creative content and strategic communication approaches, improving organic reach and audience engagement across platforms.</li>
+                    <li>Collaborated with cross-functional teams and stakeholders, ensuring smooth workflow, alignment of objectives, and effective communication across projects.</li>
+                  </ul>
+                </div>
+
+                <button type="button" class="expand-btn text-xs font-bold text-amber-800 hover:text-amber-900 mt-2 inline-flex items-center gap-1 focus:outline-none">
+                  …see more
+                </button>
+              </div>
+
+              <!-- Role 2: Project Intern -->
+              <div class="mt-5 border-l-2 border-slate-300 pl-3.5 space-y-1">
+                <h5 class="font-bold text-sm text-slate-800">Project Intern</h5>
+                <p class="text-xs font-semibold text-slate-500">Aug 2024 – Mar 2025 · 8 mos</p>
+                <ul class="text-xs sm:text-sm text-slate-600 space-y-1.5 list-disc ml-4 pt-1 leading-relaxed">
+                  <li>Supported project planning, content creation, and cross-functional team coordination across internal programs.</li>
                 </ul>
               </div>
 
-              <!-- Toggle Button -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Track 2: Leadership & Extracurricular Activities -->
+      <div id="leadership" class="space-y-4">
+        <h3 class="text-sm font-bold uppercase tracking-wider text-slate-700 flex items-center gap-2">
+          <span class="w-2.5 h-2.5 rounded-full bg-amber-700"></span>
+          Leadership & Extracurricular Activities
+        </h3>
+
+        <div class="space-y-4">
+          <!-- 1. Campus Director (Hult Prize) -->
+          <div class="bg-white/95 backdrop-blur-sm border border-slate-200 rounded-xl p-5 shadow-sm flex items-start gap-4">
+            <img src="/images/hult-prize.png" alt="HULT Prize" class="w-10 h-10 rounded-lg flex-shrink-0 border border-slate-200" onerror="this.src='https://ui-avatars.com/api/?name=HP&background=e11d48&color=ffffff&bold=true'" />
+            <div class="flex-1 min-w-0">
+              <div class="flex flex-wrap justify-between items-baseline gap-1">
+                <h4 class="font-bold text-sm sm:text-base text-slate-900">Campus Director · HULT PRIZE at CUET</h4>
+                <span class="text-xs text-amber-800 font-semibold">Sep 2025 – Mar 2026</span>
+              </div>
+              
+              <ul class="text-xs sm:text-sm text-slate-600 space-y-1 list-disc ml-4 mt-2 leading-relaxed">
+                <li>Led the overall campus execution of the HULT Prize program at CUET, overseeing event planning, coordination, and team management.</li>
+                <li>Led and managed 50+ core team members, overseeing end-to-end execution of the campus program.</li>
+              </ul>
+
+              <div class="expandable-content hidden">
+                <ul class="text-xs sm:text-sm text-slate-600 space-y-1 list-disc ml-4 pt-1 leading-relaxed">
+                  <li>Coordinated and supervised 100+ competing teams involving 300+ participants, ensuring structured event flow and engagement.</li>
+                  <li>Collaborated with national and international HULT Prize teams to ensure smooth program execution and alignment with global standards.</li>
+                  <li>Built and maintained partnerships with industry leaders and corporate stakeholders, facilitating judges, guest speakers, and sponsorship engagement.</li>
+                </ul>
+              </div>
+
               <button type="button" class="expand-btn text-xs font-bold text-amber-800 hover:text-amber-900 mt-2 inline-flex items-center gap-1 focus:outline-none">
                 …see more
               </button>
             </div>
+          </div>
 
-            <!-- Role 2: Project Intern -->
-            <div class="mt-5 border-l-2 border-slate-300 pl-3.5 space-y-1">
-              <h4 class="font-bold text-sm text-slate-800">Project Intern</h4>
-              <p class="text-xs font-semibold text-slate-500">Aug 2024 – Mar 2025 · 8 mos</p>
-              <ul class="text-xs sm:text-sm text-slate-600 space-y-1.5 list-disc ml-4 pt-1 leading-relaxed">
-                <li>Supported project planning, content creation, and cross-functional team coordination across internal programs.</li>
+          <!-- 2. Vice President (CUET Model United Nations Club) -->
+          <div class="bg-white/95 backdrop-blur-sm border border-slate-200 rounded-xl p-5 shadow-sm flex items-start gap-4">
+            <img src="/images/cuetmunc.png" alt="CUETMUNC" class="w-10 h-10 rounded-lg flex-shrink-0 border border-slate-200" onerror="this.src='https://ui-avatars.com/api/?name=MUN&background=0284c7&color=ffffff&bold=true'" />
+            <div class="flex-1 min-w-0">
+              <div class="flex flex-wrap justify-between items-baseline gap-1">
+                <h4 class="font-bold text-sm sm:text-base text-slate-900">Vice President (Delegate) · CUET Model United Nations Club</h4>
+                <span class="text-xs text-amber-800 font-semibold">Sep 2026 – Present</span>
+              </div>
+              <ul class="text-xs sm:text-sm text-slate-600 space-y-1 list-disc ml-4 mt-2 leading-relaxed">
+                <li>Lead and coordinate club initiatives, supporting strategic planning, member engagement, and execution of academic and professional development activities.</li>
+                <li>Represent the club in external Model United Nations and inter-university engagements, strengthening institutional collaboration and outreach.</li>
               </ul>
             </div>
+          </div>
 
+          <!-- 3. Team Lead (TEDx CUET) -->
+          <div class="bg-white/95 backdrop-blur-sm border border-slate-200 rounded-xl p-5 shadow-sm flex items-start gap-4">
+            <img src="/images/tedx.png" alt="TEDx CUET" class="w-10 h-10 rounded-lg flex-shrink-0 border border-slate-200" onerror="this.src='https://ui-avatars.com/api/?name=TX&background=dc2626&color=ffffff&bold=true'" />
+            <div class="flex-1 min-w-0">
+              <div class="flex flex-wrap justify-between items-baseline gap-1">
+                <h4 class="font-bold text-sm sm:text-base text-slate-900">Team Lead · TEDx CUET</h4>
+                <span class="text-xs text-amber-800 font-semibold">Mar 2025 – Jun 2025</span>
+              </div>
+              
+              <ul class="text-xs sm:text-sm text-slate-600 space-y-1 list-disc ml-4 mt-2 leading-relaxed">
+                <li>Served as a core team lead, ensuring adherence to international TEDx quality standards throughout planning and execution.</li>
+                <li>Coordinated cross-functional teams to support event logistics, speaker management, and overall program delivery.</li>
+              </ul>
+
+              <div class="expandable-content hidden">
+                <ul class="text-xs sm:text-sm text-slate-600 space-y-1 list-disc ml-4 pt-1 leading-relaxed">
+                  <li>Contributed to structured execution and smooth on-ground coordination of TEDx CUET event activities.</li>
+                </ul>
+              </div>
+
+              <button type="button" class="expand-btn text-xs font-bold text-amber-800 hover:text-amber-900 mt-2 inline-flex items-center gap-1 focus:outline-none">
+                …see more
+              </button>
+            </div>
+          </div>
+
+          <!-- 4. Public Relation Secretary (CUET Debating Society) -->
+          <div class="bg-white/95 backdrop-blur-sm border border-slate-200 rounded-xl p-5 shadow-sm flex items-start gap-4">
+            <img src="/images/cuetds.png" alt="CUET Debating Society" class="w-10 h-10 rounded-lg flex-shrink-0 border border-slate-200" onerror="this.src='https://ui-avatars.com/api/?name=DS&background=7c3aed&color=ffffff&bold=true'" />
+            <div class="flex-1 min-w-0">
+              <div class="flex flex-wrap justify-between items-baseline gap-1">
+                <h4 class="font-bold text-sm sm:text-base text-slate-900">Public Relation Secretary · CUET Debating Society</h4>
+                <span class="text-xs text-amber-800 font-semibold">Sep 2026 – Present</span>
+              </div>
+              <ul class="text-xs sm:text-sm text-slate-600 space-y-1 list-disc ml-4 mt-2 leading-relaxed">
+                <li>Direct external relations, institutional communications, and event outreach campaigns across university and national debating circuits.</li>
+                <li>Manage promotional strategy, media partnerships, and public engagement for competitive debate tournaments and workshops.</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- 5. Senior Executive (CUET Integration Bee) -->
+          <div class="bg-white/95 backdrop-blur-sm border border-slate-200 rounded-xl p-5 shadow-sm flex items-start gap-4">
+            <img src="/images/integration-bee.png" alt="Integration Bee" class="w-10 h-10 rounded-lg flex-shrink-0 border border-slate-200" onerror="this.src='https://ui-avatars.com/api/?name=IB&background=4f46e5&color=ffffff&bold=true'" />
+            <div class="flex-1 min-w-0">
+              <div class="flex flex-wrap justify-between items-baseline gap-1">
+                <h4 class="font-bold text-sm sm:text-base text-slate-900">Senior Executive · CUET Integration Bee</h4>
+                <span class="text-xs text-amber-800 font-semibold">Feb 2025 – Jan 2026</span>
+              </div>
+              <ul class="text-xs sm:text-sm text-slate-600 space-y-1 list-disc ml-4 mt-2 leading-relaxed">
+                <li>Contributed to the planning and coordination of the Bangladesh's first-ever Integration Bee, supporting the execution and on-ground operation.</li>
+                <li>Organized and hosted the live problem-solving final round, ensuring smooth execution and seamless transition between segments.</li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- 2. Leadership & Extracurricular Activities -->
-    <section id="leadership">
-      <h2 class="text-xl font-black section-title mb-6">Leadership & Extracurricular Activities</h2>
-      <div class="space-y-4">
+    <!-- Moments in Action: Asymmetrical Collage with Scroll-Reveal -->
+    <section id="moments" class="space-y-6">
+      <div>
+        <h2 class="text-xl font-black section-title">Moments in Action</h2>
+        <p class="text-xs text-slate-500 mt-0.5">Summits, stage coordination, caucus sessions, and team operations on the ground</p>
+      </div>
+
+      <!-- Asymmetrical 12-Column Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-12 gap-3.5 sm:gap-4 items-stretch">
         
-        <!-- 1. Campus Director (Hult Prize) -->
-        <div class="bg-white/95 backdrop-blur-sm border border-slate-200 rounded-xl p-5 shadow-sm flex items-start gap-4">
-          <img src="/images/hult-prize.png" alt="HULT Prize" class="w-10 h-10 rounded-lg flex-shrink-0 border border-slate-200" onerror="this.src='https://ui-avatars.com/api/?name=HP&background=e11d48&color=ffffff&bold=true'" />
-          <div class="flex-1 min-w-0">
-            <div class="flex flex-wrap justify-between items-baseline gap-1">
-              <h3 class="font-bold text-sm sm:text-base text-slate-900">Campus Director · HULT PRIZE at CUET</h3>
-              <span class="text-xs text-amber-800 font-semibold">Sep 2025 – Mar 2026</span>
-            </div>
-            
-            <ul class="text-xs sm:text-sm text-slate-600 space-y-1 list-disc ml-4 mt-2 leading-relaxed">
-              <li>Led the overall campus execution of the HULT Prize program at CUET, overseeing event planning, coordination, and team management.</li>
-              <li>Led and managed 50+ core team members, overseeing end-to-end execution of the campus program.</li>
-            </ul>
+        <!-- Row 1: Image 1 (Panel Discussion) -->
+        <div class="moment-item md:col-span-5 overflow-hidden rounded-xl bg-slate-200 border border-slate-200/80 shadow-xs group">
+          <img 
+            src="/images/moments/moment-1.jpg" 
+            alt="Panel discussion session" 
+            class="w-full h-56 sm:h-64 md:h-72 object-cover object-center group-hover:scale-105 transition-transform duration-500" 
+            loading="lazy" 
+          />
+        </div>
 
-            <div class="expandable-content hidden">
-              <ul class="text-xs sm:text-sm text-slate-600 space-y-1 list-disc ml-4 pt-1 leading-relaxed">
-                <li>Coordinated and supervised 100+ competing teams involving 300+ participants, ensuring structured event flow and engagement.</li>
-                <li>Collaborated with national and international HULT Prize teams to ensure smooth program execution and alignment with global standards.</li>
-                <li>Built and maintained partnerships with industry leaders and corporate stakeholders, facilitating judges, guest speakers, and sponsorship engagement.</li>
-              </ul>
-            </div>
+        <!-- Row 1: Image 2 (TEDx CUET Stage Wide) -->
+        <div class="moment-item md:col-span-7 overflow-hidden rounded-xl bg-slate-200 border border-slate-200/80 shadow-xs group">
+          <img 
+            src="/images/moments/moment-2.jpg" 
+            alt="TEDx CUET stage" 
+            class="w-full h-56 sm:h-64 md:h-72 object-cover object-center group-hover:scale-105 transition-transform duration-500" 
+            loading="lazy" 
+          />
+        </div>
 
-            <button type="button" class="expand-btn text-xs font-bold text-amber-800 hover:text-amber-900 mt-2 inline-flex items-center gap-1 focus:outline-none">
-              …see more
-            </button>
+        <!-- Row 2: Image 3 (Auditorium Huddle) -->
+        <div class="moment-item md:col-span-4 overflow-hidden rounded-xl bg-slate-200 border border-slate-200/80 shadow-xs group">
+          <img 
+            src="/images/moments/moment-3.jpg" 
+            alt="Auditorium caucus discussion" 
+            class="w-full h-64 sm:h-72 md:h-80 object-cover object-center group-hover:scale-105 transition-transform duration-500" 
+            loading="lazy" 
+          />
+        </div>
+
+        <!-- Row 2: Image 4 (Podium Address) -->
+        <div class="moment-item md:col-span-5 overflow-hidden rounded-xl bg-slate-200 border border-slate-200/80 shadow-xs group">
+          <img 
+            src="/images/moments/moment-4.jpg" 
+            alt="Speaking at the podium" 
+            class="w-full h-64 sm:h-72 md:h-80 object-cover object-center group-hover:scale-105 transition-transform duration-500" 
+            loading="lazy" 
+          />
+        </div>
+
+        <!-- Row 2: Images 5 & 6 Stacked Column -->
+        <div class="md:col-span-3 flex flex-col gap-3.5 sm:gap-4">
+          <!-- Image 5: Laptop Focus -->
+          <div class="moment-item flex-1 overflow-hidden rounded-xl bg-slate-200 border border-slate-200/80 shadow-xs group">
+            <img 
+              src="/images/moments/moment-5.jpg" 
+              alt="Operational focus" 
+              class="w-full h-32 sm:h-34 md:h-[9.35rem] object-cover object-center group-hover:scale-105 transition-transform duration-500" 
+              loading="lazy" 
+            />
+          </div>
+          <!-- Image 6: Summit Kit Desk -->
+          <div class="moment-item flex-1 overflow-hidden rounded-xl bg-slate-200 border border-slate-200/80 shadow-xs group">
+            <img 
+              src="/images/moments/moment-6.jpg" 
+              alt="Summit delegate hall" 
+              class="w-full h-32 sm:h-34 md:h-[9.35rem] object-cover object-center group-hover:scale-105 transition-transform duration-500" 
+              loading="lazy" 
+            />
           </div>
         </div>
 
-        <!-- 2. Vice President (CUET Model United Nations Club) -->
-        <div class="bg-white/95 backdrop-blur-sm border border-slate-200 rounded-xl p-5 shadow-sm flex items-start gap-4">
-          <img src="/images/cuetmunc.png" alt="CUETMUNC" class="w-10 h-10 rounded-lg flex-shrink-0 border border-slate-200" onerror="this.src='https://ui-avatars.com/api/?name=MUN&background=0284c7&color=ffffff&bold=true'" />
-          <div class="flex-1 min-w-0">
-            <div class="flex flex-wrap justify-between items-baseline gap-1">
-              <h3 class="font-bold text-sm sm:text-base text-slate-900">Vice President (Delegate) · CUET Model United Nations Club</h3>
-              <span class="text-xs text-amber-800 font-semibold">Sep 2026 – Present</span>
-            </div>
-            <ul class="text-xs sm:text-sm text-slate-600 space-y-1 list-disc ml-4 mt-2 leading-relaxed">
-              <li>Lead and coordinate club initiatives, supporting strategic planning, member engagement, and execution of academic and professional development activities.</li>
-              <li>Represent the club in external Model United Nations and inter-university engagements, strengthening institutional collaboration and outreach.</li>
-            </ul>
-          </div>
+        <!-- Row 3: Image 7 (Corridor Team Selfie) -->
+        <div class="moment-item md:col-span-6 overflow-hidden rounded-xl bg-slate-200 border border-slate-200/80 shadow-xs group">
+          <img 
+            src="/images/moments/moment-7.jpg" 
+            alt="Candid team selfie" 
+            class="w-full h-56 sm:h-64 md:h-72 object-cover object-center group-hover:scale-105 transition-transform duration-500" 
+            loading="lazy" 
+          />
         </div>
 
-        <!-- 3. Team Lead (TEDx CUET) -->
-        <div class="bg-white/95 backdrop-blur-sm border border-slate-200 rounded-xl p-5 shadow-sm flex items-start gap-4">
-          <img src="/images/tedx.png" alt="TEDx CUET" class="w-10 h-10 rounded-lg flex-shrink-0 border border-slate-200" onerror="this.src='https://ui-avatars.com/api/?name=TX&background=dc2626&color=ffffff&bold=true'" />
-          <div class="flex-1 min-w-0">
-            <div class="flex flex-wrap justify-between items-baseline gap-1">
-              <h3 class="font-bold text-sm sm:text-base text-slate-900">Team Lead · TEDx CUET</h3>
-              <span class="text-xs text-amber-800 font-semibold">Mar 2025 – Jun 2025</span>
-            </div>
-            
-            <ul class="text-xs sm:text-sm text-slate-600 space-y-1 list-disc ml-4 mt-2 leading-relaxed">
-              <li>Served as a core team lead, ensuring adherence to international TEDx quality standards throughout planning and execution.</li>
-              <li>Coordinated cross-functional teams to support event logistics, speaker management, and overall program delivery.</li>
-            </ul>
-
-            <div class="expandable-content hidden">
-              <ul class="text-xs sm:text-sm text-slate-600 space-y-1 list-disc ml-4 pt-1 leading-relaxed">
-                <li>Contributed to structured execution and smooth on-ground coordination of TEDx CUET event activities.</li>
-              </ul>
-            </div>
-
-            <button type="button" class="expand-btn text-xs font-bold text-amber-800 hover:text-amber-900 mt-2 inline-flex items-center gap-1 focus:outline-none">
-              …see more
-            </button>
-          </div>
-        </div>
-
-        <!-- 4. Public Relation Secretary (CUET Debating Society) -->
-        <div class="bg-white/95 backdrop-blur-sm border border-slate-200 rounded-xl p-5 shadow-sm flex items-start gap-4">
-          <img src="/images/cuetds.png" alt="CUET Debating Society" class="w-10 h-10 rounded-lg flex-shrink-0 border border-slate-200" onerror="this.src='https://ui-avatars.com/api/?name=DS&background=7c3aed&color=ffffff&bold=true'" />
-          <div class="flex-1 min-w-0">
-            <div class="flex flex-wrap justify-between items-baseline gap-1">
-              <h3 class="font-bold text-sm sm:text-base text-slate-900">Public Relation Secretary · CUET Debating Society</h3>
-              <span class="text-xs text-amber-800 font-semibold">Sep 2026 – Present</span>
-            </div>
-            <ul class="text-xs sm:text-sm text-slate-600 space-y-1 list-disc ml-4 mt-2 leading-relaxed">
-              <li>Direct external relations, institutional communications, and event outreach campaigns across university and national debating circuits.</li>
-              <li>Manage promotional strategy, media partnerships, and public engagement for competitive debate tournaments and workshops.</li>
-            </ul>
-          </div>
-        </div>
-
-        <!-- 5. Senior Executive (CUET Integration Bee) -->
-        <div class="bg-white/95 backdrop-blur-sm border border-slate-200 rounded-xl p-5 shadow-sm flex items-start gap-4">
-          <img src="/images/integration-bee.png" alt="Integration Bee" class="w-10 h-10 rounded-lg flex-shrink-0 border border-slate-200" onerror="this.src='https://ui-avatars.com/api/?name=IB&background=4f46e5&color=ffffff&bold=true'" />
-          <div class="flex-1 min-w-0">
-            <div class="flex flex-wrap justify-between items-baseline gap-1">
-              <h3 class="font-bold text-sm sm:text-base text-slate-900">Senior Executive · CUET Integration Bee</h3>
-              <span class="text-xs text-amber-800 font-semibold">Feb 2025 – Jan 2026</span>
-            </div>
-            <ul class="text-xs sm:text-sm text-slate-600 space-y-1 list-disc ml-4 mt-2 leading-relaxed">
-              <li>Contributed to the planning and coordination of the Bangladesh's first-ever Integration Bee, supporting the execution and on-ground operation.</li>
-              <li>Organized and hosted the live problem-solving final round, ensuring smooth execution and seamless transition between segments.</li>
-            </ul>
-          </div>
+        <!-- Row 3: Image 8 (TEDx CUET Team Letter Boards) -->
+        <div class="moment-item md:col-span-6 overflow-hidden rounded-xl bg-slate-200 border border-slate-200/80 shadow-xs group">
+          <img 
+            src="/images/moments/moment-8.jpg" 
+            alt="TEDx team execution" 
+            class="w-full h-56 sm:h-64 md:h-72 object-cover object-center group-hover:scale-105 transition-transform duration-500" 
+            loading="lazy" 
+          />
         </div>
 
       </div>
     </section>
 
-    <!-- 3. Education -->
+    <!-- Certifications & Training: Interactive Certificate Card Slider -->
+    <section id="certifications">
+      <div class="flex items-center justify-between mb-6">
+        <div>
+          <h2 class="text-xl font-black section-title">Certifications & Training</h2>
+          <p class="text-xs text-slate-500 mt-0.5">Continuous learning across management, process engineering, and digital tools</p>
+        </div>
+
+        <!-- Slider Controls -->
+        <div class="flex items-center gap-2">
+          <button 
+            id="cert-prev" 
+            type="button" 
+            aria-label="Previous Certificate" 
+            class="w-8 h-8 rounded-lg bg-white border border-slate-300 hover:border-amber-700 hover:text-amber-800 text-slate-600 flex items-center justify-center transition shadow-xs focus:outline-none"
+          >
+            &#8592;
+          </button>
+          <button 
+            id="cert-next" 
+            type="button" 
+            aria-label="Next Certificate" 
+            class="w-8 h-8 rounded-lg bg-white border border-slate-300 hover:border-amber-700 hover:text-amber-800 text-slate-600 flex items-center justify-center transition shadow-xs focus:outline-none"
+          >
+            &#8594;
+          </button>
+        </div>
+      </div>
+
+      <!-- Slider Track -->
+      <div 
+        id="certs-track" 
+        class="flex gap-4 overflow-x-auto no-scrollbar scroll-smooth snap-x snap-mandatory py-2 -mx-2 px-2"
+      >
+        {certifications.map(cert => (
+          <div class="min-w-[280px] sm:min-w-[320px] max-w-[320px] bg-white border border-amber-900/15 rounded-xl p-5 shadow-sm snap-start flex flex-col justify-between hover:shadow-md hover:border-amber-700/50 transition-all relative overflow-hidden group">
+            
+            <div class="absolute -top-6 -right-6 w-14 h-14 bg-gradient-to-br from-amber-200/50 to-amber-500/20 rounded-full blur-xs pointer-events-none"></div>
+
+            <div>
+              <div class="flex items-center justify-between text-[11px] font-semibold text-slate-500 mb-3">
+                <span class="bg-amber-50 text-amber-900 border border-amber-200/60 px-2 py-0.5 rounded-full">
+                  {cert.badge}
+                </span>
+                <span class="text-slate-400 font-medium">{cert.date}</span>
+              </div>
+
+              <h3 class="font-bold text-sm sm:text-base text-slate-900 leading-snug group-hover:text-amber-800 transition mb-1.5">
+                {cert.title}
+              </h3>
+
+              <p class="text-xs text-slate-600 font-medium flex items-center gap-1.5">
+                <svg class="w-3.5 h-3.5 text-amber-700 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                </svg>
+                {cert.issuer}
+              </p>
+            </div>
+
+            <div class="pt-5 mt-4 border-t border-slate-100 flex items-center justify-between">
+              <a 
+                href={cert.link} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                class="text-xs font-bold text-amber-800 hover:text-amber-900 inline-flex items-center gap-1 group-hover:translate-x-0.5 transition-transform"
+              >
+                View Credential <span>&nearr;</span>
+              </a>
+              <span class="text-[10px] uppercase tracking-wider text-slate-400 font-semibold">Verified</span>
+            </div>
+
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Education -->
     <section id="education">
       <h2 class="text-xl font-black section-title mb-6">Education</h2>
       <div class="bg-white/95 backdrop-blur-sm border border-slate-200 rounded-xl p-6 shadow-sm space-y-6">
@@ -359,7 +601,7 @@ const recentPosts = posts.slice(0, 2);
       </div>
     </section>
 
-    <!-- 4. Skills -->
+    <!-- Skills -->
     <section id="skills">
       <h2 class="text-xl font-black section-title mb-6">Skills & Toolkit</h2>
       <div class="space-y-4">
@@ -414,7 +656,7 @@ const recentPosts = posts.slice(0, 2);
       </div>
     </section>
 
-    <!-- 5. Recent Articles & Field Notes -->
+    <!-- Recent Articles & Field Notes -->
     <section id="blog-preview">
       <div class="flex items-center justify-between mb-6">
         <h2 class="text-xl font-black section-title">Writing & Field Notes</h2>
@@ -464,7 +706,6 @@ const recentPosts = posts.slice(0, 2);
           <span class="text-xs font-semibold text-slate-300 uppercase tracking-wider">Connect:</span>
           
           <div class="flex items-center gap-3">
-            <!-- LinkedIn -->
             <a 
               href="https://www.linkedin.com/in/raihanulkarim02" 
               target="_blank" 
@@ -480,7 +721,6 @@ const recentPosts = posts.slice(0, 2);
               />
             </a>
 
-            <!-- ResearchGate -->
             <a 
               href="https://www.researchgate.net/profile/Raihanul-Karim?ev=hdr_xprf" 
               target="_blank" 
@@ -496,7 +736,6 @@ const recentPosts = posts.slice(0, 2);
               />
             </a>
 
-            <!-- Facebook -->
             <a 
               href="https://www.facebook.com/profile.php?id=100085123103216" 
               target="_blank" 
@@ -512,7 +751,6 @@ const recentPosts = posts.slice(0, 2);
               />
             </a>
 
-            <!-- Instagram -->
             <a 
               href="https://www.instagram.com/raihanulkarim02/" 
               target="_blank" 
@@ -528,7 +766,6 @@ const recentPosts = posts.slice(0, 2);
               />
             </a>
 
-            <!-- Quora -->
             <a 
               href="https://bn.quora.com/profile/Raihanul-Karim-1?ch=10&oid=1234586537&share=7cb23ec8&srid=uDa3hd&target_type=user" 
               target="_blank" 
@@ -565,7 +802,7 @@ const recentPosts = posts.slice(0, 2);
     </div>
   </footer>
 
-  <!-- Scripts: Mobile Menu & Read More Toggles -->
+  <!-- Scripts: Mobile Menu, Read More Toggles, Slider & Scroll Pop-In Observer -->
   <script>
     // 1. Mobile Menu Toggle
     const menuBtn = document.getElementById('mobile-menu-btn');
@@ -593,6 +830,81 @@ const recentPosts = posts.slice(0, 2);
         }
       });
     });
+
+    // 3. Fast Auto-Sliding Certificate Track
+    const track = document.getElementById('certs-track');
+    const prevBtn = document.getElementById('cert-prev');
+    const nextBtn = document.getElementById('cert-next');
+
+    if (track) {
+      const scrollStep = 336;
+      let autoSlideTimer: any = null;
+
+      const slideNext = () => {
+        if (track.scrollLeft + track.clientWidth >= track.scrollWidth - 10) {
+          track.scrollTo({ left: 0, behavior: 'smooth' });
+        } else {
+          track.scrollBy({ left: scrollStep, behavior: 'smooth' });
+        }
+      };
+
+      const slidePrev = () => {
+        if (track.scrollLeft <= 10) {
+          track.scrollTo({ left: track.scrollWidth, behavior: 'smooth' });
+        } else {
+          track.scrollBy({ left: -scrollStep, behavior: 'smooth' });
+        }
+      };
+
+      const startTimer = () => {
+        stopTimer();
+        autoSlideTimer = setInterval(slideNext, 2400);
+      };
+
+      const stopTimer = () => {
+        if (autoSlideTimer) clearInterval(autoSlideTimer);
+      };
+
+      nextBtn?.addEventListener('click', () => {
+        slideNext();
+        startTimer();
+      });
+
+      prevBtn?.addEventListener('click', () => {
+        slidePrev();
+        startTimer();
+      });
+
+      track.addEventListener('mouseenter', stopTimer);
+      track.addEventListener('mouseleave', startTimer);
+      track.addEventListener('touchstart', stopTimer, { passive: true });
+      track.addEventListener('touchend', startTimer, { passive: true });
+
+      startTimer();
+    }
+
+    // 4. Staggered Scroll-Triggered Reveal for Moments in Action
+    const momentCards = document.querySelectorAll('.moment-item');
+    if (momentCards.length > 0) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const el = entry.target;
+            const index = Array.from(momentCards).indexOf(el);
+            // Stagger each image slightly as it scrolls into viewport
+            setTimeout(() => {
+              el.classList.add('is-revealed');
+            }, (index % 4) * 110);
+            observer.unobserve(el);
+          }
+        });
+      }, {
+        threshold: 0.12,
+        rootMargin: '0px 0px -40px 0px'
+      });
+
+      momentCards.forEach(card => observer.observe(card));
+    }
   </script>
 
 </body>
